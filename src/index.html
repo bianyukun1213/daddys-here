@@ -6,32 +6,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我是你爹！</title>
+    <link rel="stylesheet" href="./third-party/unreset.css">
     <link rel="stylesheet" href="/dist/output.css">
     <script src="./third-party/decode-punycode.js"></script>
     <script src="./third-party/ToolGood.Words.StringSearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-    <div class="dh-root absolute inset-0">
-        <div class="dh-template-1 w-full h-full">
+    <h1 class="hidden">我是你爹！</h1>
+    <div class="dh-top-screens absolute inset-0 z-50">
+        <div class="dh-loading-screen absolute inset-0 bg-yellow-500">
             <div
-                class="dh-content absolute inset-0 m-auto w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap space-y-12">
-                <h1 class="dh-title ml-6 text-left text-5xl font-bold text-black">亲爱的我是你爹我是你爹，我是你爹！</h1>
-                <div
-                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 space-y-6 overflow-y-scroll overscroll-contain rounded-3xl shadow-2xl bg-yellow-300">
-                    <div class="dh-markdown flex-grow bg-white">
+                class="dh-loading absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 align-middle w-full text-center text-5xl font-bold text-white">
+                加载中……</div>
+        </div>
+        <div class="dh-hint-screen hidden absolute inset-0 bg-yellow-500">
+            <div
+                class="dh-hint absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 align-middle w-full text-center text-5xl font-bold text-white">
+                <div class="dh-loading-hint-title mb-6">
+                    格式
+                </div>
+                <div class="hd-hint-text text-3xl">
+                    <a class="dh-hint-link underline" href="https://大儿砸.我是你爹.com">
+                        名字.我是你爹.com
+                    </a>
+                </div>
 
-                    </div>
-                    <div class="dh-daddy text-right text-xl text-black">你爹</div>
+            </div>
+        </div>
+        <div class="dh-name-change-screen hidden absolute inset-0 bg-blue-500">
+            <div class="dh-name-change absolute p-16 text-9xl text-white">
+                <div class="dh-name-change-title mb-16">
+                    :(
+                </div>
+                <div class="dh-name-change-text font-normal text-3xl">
+                    你的网页遇到问题，需要换一个名字。
                 </div>
             </div>
         </div>
     </div>
+    <div class="dh-root absolute inset-0">
+        <div class="dh-template-default hidden absolute inset-0 bg-blue-50">
+            <div
+                class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap space-y-12">
+                <div class="dh-title ml-6 text-left text-5xl font-bold text-black">{{name}}，我是你爹！</div>
+                <div
+                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 space-y-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
+                    <div class="dh-markdown unreset flex-grow overflow-y-scroll overscroll-contain ">
+
+                    </div>
+                    <div class="dh-daddy text-right text-xl font-bold text-black">爱你的爸爸，{{daddyName}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="dh-template-test hidden absolute inset-0 bg-red-50">
+            <div class="dh-template-test-blink absolute right-0 w-40 h-40 z-10 bg-red-500"></div>
+            <div
+                class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap space-y-12">
+                <div class="dh-title ml-6 text-left text-5xl font-bold text-black">{{name}}，你是我爹……</div>
+                <div
+                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 space-y-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
+                    <div class="dh-markdown unreset flex-grow  overflow-y-scroll overscroll-contain ">
+
+                    </div>
+                    <div class="dh-daddy text-right text-xl font-bold text-black">{{daddyName}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="dh-pale absolute inset-0 -z-50">如此静谧，仿佛世界离你而去，再没有什么值得牵肠挂肚。这里**什么**都没有。除了你。这是母亲的子宫。<br><br>博学多闻 -
+            无色、无味、无特征且坚不可摧、永垂不朽。显然，这是一片**灰域**，而不是子宫。<br><br>见微知著 -
+            在久远的过去，开发者泼洒出这片灰域，也许是用于调试，也许是为了一点点乐趣。<br><br>解锁成就：灰域行者
+        </div>
+    </div>
+    <div class="dh-functions absolute inset-0 z-50">
+        <textarea class="dh-ta w-96 h-16" name="" id="" cols="30" rows="10"></textarea>
+        <button class="dh-btn w-16 h-12">aaaaaa</button>
+        <button class="dh-btn2 w-16 h-12">bbbbbb</button>
+    </div>
     <script>
+
+
+
+
+
+        console.log('瞅什么瞅，我是你爹！');
         // let hostTmp = 'xn--vjqt50bik1b.xn--6qq986bm4cjwp.com';
-        let hostTmp = '王刚.xn--6qq986bm4cjwp.com';
+        // let hostTmp = '王刚.xn--6qq986bm4cjwp.com';
+        // let hostTmp = 'Hollis.xn--6qq986bm4cjwp.com';
+        // let hostTmp = 'xn--6qq986bm4cjwp.com';
+        // let hostTmp = '大儿砸.xn--6qq986bm4cjwp.com';
+        // let hostTmp = '大儿.xn--6qq986bm4cjwp.com';
+        let hostTmp = 'aaaaaa.xn--6qq986bm4cjwp.com';
+        // let hostTmp = 'bbbbbb.xn--6qq986bm4cjwp.com';
         let hostSplited = hostTmp.split('.');
         // let hostSplited = window.location.host.split['.'];
         if (hostSplited.length === 3) {
@@ -43,25 +112,222 @@
             }
             let bannedWords = ['毛泽东', '周恩来', '刘少奇', '朱德', '彭德怀', '林彪', '刘伯承', '陈毅', '贺龙', '聂荣臻', '徐向前', '罗荣桓', '叶剑英', '李大钊', '陈独秀', '孙中山', '孙文', '孙逸仙', '邓小平', '陈云', '江泽民', '李鹏', '朱镕基', '李瑞环', '尉健行', '李岚清', '胡锦涛', '罗干', '温家宝', '吴邦国', '曾庆红', '贾庆林', '黄菊', '吴官正', '李长春', '吴仪', '回良玉', '曾培炎', '曹刚川', '唐家璇', '华建敏', '陈至立', '张德江', '俞正声', '王乐泉', '刘云山', '王刚', '王兆国', '刘淇', '贺国强', '郭伯雄', '胡耀邦', '王乐泉', '王兆国', '习近平', '李克强', '张高丽', '刘延东', '彭丽媛', '王岐山', '华国锋', '胡耀邦', '习大大', '吴帮国', '无帮国', '无邦国', '无帮过', '瘟家宝', '假庆林', '甲庆林', '假青林', '离长春', '习远平', '袭近平', '李磕墙', '贺过墙', '和锅枪', '胡主席', '习主席', '毛主席'];
             let bannedWordsTr = ['毛澤東', '周恩來', '劉少奇', '朱德', '彭德懷', '林彪', '劉伯承', '陳毅', '賀龍', '聶榮臻', '徐向前', '羅榮桓', '葉劍英', '李大釗', '陳獨秀', '孫中山', '孫文', '孫逸仙', '鄧小平', '陳雲', '江澤民', '李鵬', '朱镕基', '李瑞環', '尉健行', '李嵐清', '胡錦濤', '羅幹', '溫家寶', '吳邦國', '曾慶紅', '賈慶林', '黃菊', '吳官正', '李長春', '吳儀', '回良玉', '曾培炎', '曹剛川', '唐家璇', '華建敏', '陳至立', '張德江', '俞正聲', '王樂泉', '劉雲山', '王剛', '王兆國', '劉淇', '賀國強', '郭伯雄', '胡耀邦', '王樂泉', '王兆國', '習近平', '李克強', '張高麗', '劉延東', '彭麗媛', '王岐山', '華國鋒', '胡耀邦', '習大大', '吳幫國', '無幫國', '無邦國', '無幫過', '瘟家寶', '假慶林', '甲慶林', '假青林', '離長春', '習遠平', '襲近平', '李磕墻', '賀過墻', '和鍋槍', '胡主席', '習主席', '毛主席'];
+            bannedWords = bannedWords.concat(bannedWordsTr);
             let search = new StringSearch();
             search.SetKeywords(bannedWords);
-            let invalid = search.ContainsAny(nameStr) || nameStr.length > 8;
+            let invalid = search.ContainsAny(nameStr) || nameStr.length > 10;
             if (!invalid) {
-                search.SetKeywords(bannedWordsTr);
-                invalid = invalid && search.ContainsAny(nameStr);
-            }
-            if (!invalid) {
-                // alert('合法');
-                // do things here
+
+                $('.dh-btn').click(() => {
+                    let mk = $('.dh-ta').val();
+                    dhPost({
+                        entry: '/create',
+                        data: JSON.stringify({
+                            name: 'bbbbbb',
+                            daddy: 'sbsbb',
+                            markdown: mk
+                        })
+                    });
+                });
+                $('.dh-btn2').click(() => {
+                    switchProfile();
+                });
+
+
+
+                // 先随机生成一套数据，然后发送请求，查无此人或出错都使用随机数据
+                // 如果没出错，就选择第一个结果（如果有 hash，选择 hash 对应），设置 hash，提供切换功能，也可切换到随机数据
+                // 
+                let randomItem = (array) => {
+                    return array[Math.floor((Math.random() * array.length))];
+                };
+                let getTemplate = (name) => {
+                    for (let i = 0, length = templates.length; i < length; i++) {
+                        if (name === templates[i].name) {
+                            return templates[i];
+                        }
+                    }
+                };
+                let getTemplateResource = (name, resourceName) => {
+                    return templateResources[name][resourceName];
+                    // return templateResources[`template-${name}-resource`][resourceName];
+                };
+                let setTemplateResource = (name, resourceName, resource) => {
+                    templateResources[name] = templateResources[name] || {};
+                    templateResources[name][resourceName] = resource;
+                    // templateResources[`template-${name}-resource`][resourceName] = resource;
+                };
+                let removeTemplateResource = (name, resourceName) => {
+                    delete templateResources[name].resourceName;
+                    // delete templateResources[`template-${name}-resource`].resourceName;
+                };
+                let switchProfile = (profile) => {
+                    let luckyTemplate = randomItem(templates);
+                    let luckyMarkdown = randomItem(luckyTemplate.data.markdowns);
+                    let localProfile = {
+                        name: nameStr,
+                        daddy: luckyTemplate.data.daddyName,
+                        markdown: luckyMarkdown,
+                        template: luckyTemplate
+                    };
+                    profile = profile || localProfile;
+                    profile.markdown = profile.markdown || localProfile.markdown;
+                    profile.template = profile.template || localProfile.template;
+
+                    currentTemplate = currentTemplate || profile.template; // 第一次进入网站时，currentTemplate 未定义
+                    console.log(currentTemplate, profile.template)
+                    if (currentTemplate !== profile.template) { // 说明有旧模板
+                        console.log('aaaaaaaaaaaaa')
+                        currentTemplate.data.destroy();
+                        $(`.dh-template-${currentTemplate.name}`).addClass('hidden');
+                    }
+                    $(document).attr('title', profile.name + '，我是你爹！');
+                    $(`.dh-template-${profile.template.name} .dh-title`).text((i, original) => { return original.replace('{{name}}', profile.name); });
+                    let daddyCensored = search.Replace(profile.daddy, '❤️');
+                    $(`.dh-template-${profile.template.name} .dh-daddy`).text((i, original) => { return original.replace('{{daddyName}}', daddyCensored); });
+                    let markdownCensored = search.Replace(profile.markdown, '❤️');
+                    $(`.dh-template-${profile.template.name} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
+                    $(`.dh-template-${profile.template.name}`).removeClass('hidden');
+                    profile.template.data.initialize();
+                    currentTemplate = profile.template;
+                };
+                let dhRequest = (options) => {
+                    const BASE_URL = 'https://daddyshere.hollisdevhub.com/api/sons';
+                    options = options || {};
+                    let entry = options.entry || '';
+                    let method = options.method || 'GET';
+                    let contentType = options.contentType || 'application/json';
+                    let data = options.data || {};
+                    let success = (result, status, xhr) => {
+                        if (result.code === 0) {
+                            console.log(`${options.method} ${options.entry} 请求成功：`, result);
+                            if (typeof options.success === 'function') {
+                                options.success(result.result);
+                            }
+                            return;
+                        }
+                        else {
+                            console.log(`${options.method} ${options.entry} 请求成功，但返回结果标记异常：`, result);
+                            if (typeof options.fail === 'function') {
+                                options.fail(status, result.code, result.msg);
+                            }
+                        }
+                    };
+                    let fail = (xhr, status, error) => {
+                        console.log(`${options.method} ${options.entry} 请求失败：${status}, `, error);
+                        if (typeof options.fail === 'function') {
+                            options.fail(status);
+                        }
+                    };
+                    let complete = (xhr, status) => {
+                        if (typeof options.complete === 'function') {
+                            options.complete();
+                        }
+                    };
+                    $.ajax({
+                        url: BASE_URL + entry,
+                        type: method,
+                        contentType: contentType,
+                        data: data,
+                        timeout: 3000,
+                        beforeSend: () => {
+                            console.log(`发送 AJAX 请求：${method} ${entry}，数据：`, data);
+                        }
+                        // success: success,
+                        // error: fail,
+                        // complete: complete
+                    }).done(success).fail(fail).always(complete);
+                };
+                let dhGet = (options) => {
+                    options = options || {};
+                    options.method = 'GET';
+                    dhRequest(options);
+                };
+                let dhPost = (options) => {
+                    options = options || {};
+                    options.method = 'POST';
+                    dhRequest(options);
+                };
+                let templateResources = {};
+                let templates = [
+                    {
+                        name: 'default',
+                        data: {
+                            markdowns: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                            daddyName: '某神秘男子',
+                            initialize: () => {
+                                console.log('default 模板初始化。');
+
+                            },
+                            destroy: () => {
+                                console.log('default 模板注销。');
+
+                            }
+                        }
+                    },
+                    {
+                        name: 'test',
+                        data: {
+                            markdowns: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'],
+                            daddyName: '乔治·RR·马丁',
+                            initialize: () => {
+                                console.log('test 模板初始化。');
+
+                                // bug 待修，interval 传入 setTemplateResource 函数时似乎是复制了而不是直接传递的引用
+                                // 可能需要抛弃函数，直接在 templateResources 的 object 上读写
+                                let interval = setInterval(() => {
+                                    $('.dh-template-test-blink').hasClass('hidden') ? $('.dh-template-test-blink').removeClass('hidden') : $('.dh-template-test-blink').addClass('hidden');
+                                }, 1000);
+                                setTemplateResource('test', 'blink', interval);
+                            },
+                            destroy: () => {
+                                let interval = getTemplateResource('test', 'blink');
+                                clearInterval(interval);
+                                removeTemplateResource('test', 'blink');
+                                console.log('test 模板注销。');
+
+                            }
+                        }
+                    }
+                ];
+                let currentTemplate; // 保持未定义状态，赋值为 {} 的话，比较时会出错
+                // let luckyTemplate = randomItem(templates);
+                // let luckyMarkdown = randomItem(luckyTemplate.data.markdowns);
+                // let localProfile = {
+                //     name: nameStr,
+                //     daddy: luckyTemplate.data.daddyName,
+                //     markdown: luckyMarkdown,
+                //     template: luckyTemplate
+                // };
+                let onlineProfiles = [];
+                dhGet({
+                    entry: `/get-by-name/${nameStr}`,
+                    success: (res) => {
+                        onlineProfiles = res;
+                        let hashId = window.location.hash.replace('#', '');
+                        if (hashId !== '') {
+                            for (let i = 0, length = res.length; i < length; i++) {
+                                if (hashId === res[i].id) {
+                                    switchProfile(res[i]);
+                                    return;
+                                    // break;
+                                }
+                            }
+                        }
+                        switchProfile(res[0]);
+                    },
+                    fail: () => { switchProfile(); },
+                    // complete: () => { $('.dh-loading-screen').addClass('hidden'); }
+                    complete: () => { $('.dh-top-screens').addClass('hidden'); } // 直接隐藏掉顶层屏幕，不然顶层屏幕绝对定位，点击无法穿透
+                });
             } else {
-                // alert('非法');
-                // window.location='https://儿砸.我是你爹.com';
-
+                $('.dh-loading-screen').addClass('hidden');
+                $('.dh-name-change-screen').removeClass('hidden');
             }
-
+        } else {
+            $('.dh-loading-screen').addClass('hidden');
+            $('.dh-hint-screen').removeClass('hidden');
         }
-
-        // console.log(str, str2);
     </script>
 </body>
 
