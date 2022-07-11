@@ -330,6 +330,7 @@
                                 $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
                                 let daddyCensored = search.Replace(profile.daddy, '❤️');
                                 $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
+                                // 只有在老子有头像的情况下，儿子才能有头像，免得分不清谁是老子谁是儿子
                                 if (profile.daddyAvatar) {
                                     $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
                                     if (profile.avatar) {
@@ -345,6 +346,7 @@
                                 }
                                 if (profile.expiration) {
                                     profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保留。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                                    $(`.dh-template-${profile.template} .dh-profile-info`).removeClass('hidden');
                                 }
                                 $(`.dh-template-${profile.template}`).removeClass('hidden');
                                 console.log(`${profile.template} 模板初始化完成。`);
