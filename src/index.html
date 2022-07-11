@@ -17,7 +17,10 @@
 </head>
 
 <body>
-    <h1 class="hidden">我是你爹！</h1>
+    <!-- 需要动态设置的类，先在这里添加以让 Tailwind CSS 编译 -->
+    <div class="dh-tailwind-css-classes-init hidden">
+        <h1 class="invisible">我是你爹！</h1>
+    </div>
     <div class="dh-top-screens absolute inset-0 z-50">
         <div class="dh-loading-screen absolute inset-0 bg-yellow-500">
             <div
@@ -51,13 +54,30 @@
     </div>
     <div class="dh-root absolute inset-0">
         <div class="dh-template-default hidden absolute inset-0 bg-blue-50">
+            <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
             <div
-                class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap space-y-12">
-                <div class="dh-title ml-6 text-left text-5xl font-bold ">{{name}}，我是你爹！</div>
+                class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap">
+                <div class="dh-title ml-6 mb-12 text-left text-5xl font-bold ">
+                    <div class="dh-title-name inline"></div>
+                    <div class="dh-title-text inline">，我是你爹！</div>
+                </div>
                 <div
-                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 space-y-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
-                    <div class="dh-markdown unreset flex-grow overflow-y-scroll overscroll-contain ">
-
+                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
+                    <!-- 又包了一层。hidden 和 flex 不能加在同一元素上，因为 Tailwind CSS 的 hidden 实际上是 display: none -->
+                    <div class="dh-avatar-group hidden absolute right-12 -mt-14">
+                        <div class="dh-avatars flex flex-nowrap items-center">
+                            <div
+                                class="dh-avatar w-14 h-14 mr-4 overflow-hidden rounded-md shadow-md border-2 border-stone-300">
+                                <!-- 似乎指定了宽高，object-cover 才会工作 -->
+                                <img class="dh-avatar-img h-14 w-full object-cover" />
+                            </div>
+                            <div
+                                class="dh-daddy-avatar w-20 h-20 overflow-hidden rounded-md shadow-md border-2 border-stone-300">
+                                <img class="dh-daddy-avatar-img h-20 w-full object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dh-markdown unreset mb-6 flex-grow overflow-y-scroll overscroll-contain ">
                     </div>
                     <div class="dh-card-tail flex flex-nowrap justify-between">
                         <div class="dh-functions flex flex-nowrap">
@@ -71,28 +91,70 @@
                             </div>
                         </div>
                         <div class="dh-daddy text-right flex items-center justify-center text-xl font-bold ">
-                            爱你的爸爸，{{daddyName}}</div>
-                        <div class="dh-profile-info absolute right-4 bottom-4 text-right text-xs text-gray-500">
-                            网友定制，将于 2022/7/11 过期。
+                            <!-- 用 flex 是为了文字垂直居中，但会导致里面两个行内 div 在宽度不足时各自换行，需要用 wrapper 修复 -->
+                            <div class="dh-daddy-wrapper">
+                                <div class="dh-daddy-text inline">爱你的爸爸，</div>
+                                <div class="dh-daddy-name inline"></div>
+                            </div>
+                        </div>
+                        <div class="dh-profile-info hidden absolute right-4 bottom-4 text-right text-xs text-gray-500">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="dh-music absolute bottom-0 hidden">
+            <div class="dh-music hidden absolute bottom-0">
             </div>
         </div>
         <div class="dh-template-test hidden absolute inset-0 bg-red-50">
-            <div class="dh-template-test-blink absolute right-0 w-40 h-40 z-10 bg-red-500"></div>
+            <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
             <div
-                class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap space-y-12">
-                <div class="dh-title ml-6 text-left text-5xl font-bold ">{{name}}，你是我爹……</div>
-                <div
-                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 space-y-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
-                    <div class="dh-markdown unreset flex-grow  overflow-y-scroll overscroll-contain ">
-
-                    </div>
-                    <div class="dh-daddy text-right text-xl font-bold ">{{daddyName}}</div>
+                class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap">
+                <div class="dh-title ml-6 mb-12 text-left text-5xl font-bold ">
+                    <div class="dh-title-name inline"></div>
+                    <div class="dh-title-text inline">，我是你爹！</div>
                 </div>
+                <div
+                    class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
+                    <!-- 又包了一层。hidden 和 flex 不能加在同一元素上，因为 Tailwind CSS 的 hidden 实际上是 display: none -->
+                    <div class="dh-avatar-group hidden absolute right-12 -mt-14">
+                        <div class="dh-avatars flex flex-nowrap items-center">
+                            <div
+                                class="dh-avatar w-14 h-14 mr-4 overflow-hidden rounded-md shadow-md border-2 border-stone-300">
+                                <!-- 似乎指定了宽高，object-cover 才会工作 -->
+                                <img class="dh-avatar-img h-14 w-full object-cover" />
+                            </div>
+                            <div
+                                class="dh-daddy-avatar w-20 h-20 overflow-hidden rounded-md shadow-md border-2 border-stone-300">
+                                <img class="dh-daddy-avatar-img h-20 w-full object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dh-markdown unreset mb-6 flex-grow overflow-y-scroll overscroll-contain ">
+                    </div>
+                    <div class="dh-card-tail flex flex-nowrap justify-between">
+                        <div class="dh-functions flex flex-nowrap">
+                            <div
+                                class="dh-function-btn-switch-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-blue-500">
+                                <i class="fa-regular fa-address-card"></i>
+                            </div>
+                            <div
+                                class="dh-function-btn-add-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-blue-500">
+                                <i class="fa-regular fa-square-plus"></i>
+                            </div>
+                        </div>
+                        <div class="dh-daddy text-right flex items-center justify-center text-xl font-bold ">
+                            <!-- 用 flex 是为了文字垂直居中，但会导致里面两个行内 div 在宽度不足时各自换行，需要用 wrapper 修复 -->
+                            <div class="dh-daddy-wrapper">
+                                <div class="dh-daddy-text inline">爱你的爸爸，</div>
+                                <div class="dh-daddy-name inline"></div>
+                            </div>
+                        </div>
+                        <div class="dh-profile-info hidden absolute right-4 bottom-4 text-right text-xs text-gray-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dh-music hidden absolute bottom-0">
             </div>
         </div>
         <div class="dh-pale absolute inset-0 -z-50">如此静谧，仿佛世界离你而去，再没有什么值得牵肠挂肚。这里**什么**都没有。除了你。这是母亲的子宫。<br><br>博学多闻 -
@@ -100,18 +162,18 @@
             在久远的过去，开发者泼洒出这片灰域，也许是用于调试，也许是为了一点点乐趣。<br><br>解锁成就：灰域行者
         </div>
     </div>
-    <!-- <div class="dh-functions absolute inset-0 z-50">
+    <div class="dh-functions absolute inset-0 z-50">
         <textarea class="dh-ta w-96 h-16" name="" id="" cols="30" rows="10"></textarea>
         <button class="dh-btn w-16 h-12">aaaaaa</button>
         <button class="dh-btn2 w-16 h-12">bbbbbb</button>
-    </div> -->
+    </div>
     <script>
         console.log('瞅什么瞅，我是你爹！');
         // let hostTmp = 'xn--vjqt50bik1b.xn--6qq986bm4cjwp.com';
         // let hostTmp = '王刚.xn--6qq986bm4cjwp.com';
-        let hostTmp = 'Hollis.xn--6qq986bm4cjwp.com';
+        // let hostTmp = 'Hollis.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'xn--6qq986bm4cjwp.com';
-        // let hostTmp = '大儿砸.xn--6qq986bm4cjwp.com';
+        let hostTmp = '大儿砸.xn--6qq986bm4cjwp.com';
         // let hostTmp = '大儿.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'aaaaaa.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'bbbbbb.xn--6qq986bm4cjwp.com';
@@ -173,47 +235,29 @@
                     delete templateResources[`template-${name}-resource`].resourceName;
                 };
                 let switchProfile = (profile) => {
+                    // 注意，这里 profile 里的 template 为与后端同一，都只是模板名称，需要获取模板对象使用 getTemplate
                     let luckyTemplate = randomItem(templates);
                     let luckyMarkdown = randomItem(luckyTemplate.data.markdowns);
                     let localProfile = {
                         name: nameStr,
                         daddy: luckyTemplate.data.daddyName,
                         markdown: luckyMarkdown,
-                        template: luckyTemplate
+                        template: luckyTemplate.name
                     };
                     profile = profile || localProfile;
                     profile.markdown = profile.markdown || localProfile.markdown;
-                    profile.template = profile.template || localProfile.template;
-                    if (JSON.stringify(currentTemplate) !== '{}') {
-                        currentTemplate.data.destroy();
-                        // $(`.dh-template-${profile.template.name} .dh-title`).text('')
-                        $(`.dh-template-${currentTemplate.name} .dh-music`).html('');
-                        $(`.dh-template-${currentTemplate.name}`).addClass('hidden');
+                    // profile.template 为空，或找不到对应模板，都会进入这里
+                    if (typeof getTemplate(profile.template) === 'undefined') {
+                        profile.template = localProfile.template;
                     }
-                    $(document).attr('title', profile.name + '，我是你爹！');
-                    $(`.dh-template-${profile.template.name} .dh-title`).text((i, original) => { return original.replace('{{name}}', profile.name); });
-                    let daddyCensored = search.Replace(profile.daddy, '❤️');
-                    $(`.dh-template-${profile.template.name} .dh-daddy`).text((i, original) => { return original.replace('{{daddyName}}', daddyCensored); });
-                    let markdownCensored = search.Replace(profile.markdown, '❤️');
-                    $(`.dh-template-${profile.template.name} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
-
-
-                    if (profile.cloudMusicId) {
-                        $(`.dh-template-${profile.template.name} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=66"></iframe>`);
-                        $(`.dh-template-${profile.template.name} .dh-music`).removeClass('hidden');
+                    if (JSON.stringify(currentProfile) !== '{}') {
+                        getTemplate(currentProfile.template).data.destroy(currentProfile);
                     }
-
-                    if (profile.expiration) {
-                        profile.reserved ? $(`.dh-template-${profile.template.name} .dh-profile-info`).text('网友定制，永久保存。') : (`.dh-template-${profile.template.name} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration} 过期。`);
-                    }
-
-
-                    $(`.dh-template-${profile.template.name}`).removeClass('hidden');
-                    profile.template.data.initialize();
+                    getTemplate(profile.template).data.initialize(profile);
                     if (profile.id) {
                         window.location.hash = profile.id;
                     }
-                    currentTemplate = profile.template;
+                    currentProfile = profile;
                 };
                 let dhRequest = (options) => {
                     const BASE_URL = 'https://daddyshere.hollisdevhub.com/api/sons';
@@ -224,14 +268,14 @@
                     let data = options.data || {};
                     let success = (result, status, xhr) => {
                         if (result.code === 0) {
-                            console.log(`${options.method} ${options.entry} 请求成功：`, result);
+                            console.log(`${options.method} ${options.entry} 请求成功：`, JSON.parse(JSON.stringify(result))); // 之后任何对 result 的修改都会影响这里，所以打印的时候“复制”一份来打印原样
                             if (typeof options.success === 'function') {
                                 options.success(result.result);
                             }
                             return;
                         }
                         else {
-                            console.log(`${options.method} ${options.entry} 请求成功，但返回结果标记异常：`, result);
+                            console.log(`${options.method} ${options.entry} 请求成功，但返回结果标记异常：`, JSON.parse(JSON.stringify(result)));
                             if (typeof options.fail === 'function') {
                                 options.fail(status, result.code, result.msg);
                             }
@@ -276,13 +320,45 @@
                         data: {
                             markdowns: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
                             daddyName: '某神秘男子',
-                            initialize: () => {
-                                console.log('default 模板初始化。');
-
+                            initialize: (profile) => {
+                                console.log(`${profile.template} 模板初始化。`);
+                                $(document).attr('title', profile.name + '，我是你爹！');
+                                $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
+                                let daddyCensored = search.Replace(profile.daddy, '❤️');
+                                $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
+                                if (profile.daddyAvatar) {
+                                    $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                                    if (profile.avatar) {
+                                        $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
+                                    }
+                                    $(`.dh-template-${profile.template} .dh-avatar-group`).removeClass('hidden');
+                                }
+                                let markdownCensored = search.Replace(profile.markdown, '❤️');
+                                $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
+                                if (profile.cloudMusicId) {
+                                    $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=66"></iframe>`);
+                                    $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
+                                }
+                                if (profile.expiration) {
+                                    profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保留。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                                }
+                                $(`.dh-template-${profile.template}`).removeClass('hidden');
+                                console.log(`${profile.template} 模板初始化完成。`);
                             },
-                            destroy: () => {
-                                console.log('default 模板注销。');
-
+                            destroy: (profile) => {
+                                console.log(`${profile.template} 模板注销。`);
+                                $(`.dh-template-${profile.template} .dh-title-name`).text('');
+                                $(`.dh-template-${profile.template} .dh-daddy-name`).text('');
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', '');
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', '');
+                                $(`.dh-template-${profile.template} .dh-avatar-group`).addClass('hidden');
+                                $(`.dh-template-${profile.template} .dh-markdown`).html('');
+                                $(`.dh-template-${profile.template} .dh-music`).html('');
+                                $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
+                                $(`.dh-template-${profile.template} .dh-profile-info`).text('');
+                                $(`.dh-template-${profile.template} .dh-profile-info`).addClass('hidden');
+                                $(`.dh-template-${profile.template}`).addClass('hidden');
+                                console.log(`${profile.template} 模板注销完成。`);
                             }
                         }
                     },
@@ -291,25 +367,61 @@
                         data: {
                             markdowns: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'],
                             daddyName: '乔治·RR·马丁',
-                            initialize: () => {
-                                console.log('test 模板初始化。');
-                                initTemplateResource('test');
-                                let interval = setInterval(() => {
-                                    $('.dh-template-test-blink').hasClass('hidden') ? $('.dh-template-test-blink').removeClass('hidden') : $('.dh-template-test-blink').addClass('hidden');
-                                }, 1000);
-                                setTemplateResource('test', 'blink', interval);
-                            },
-                            destroy: () => {
-                                let interval = getTemplateResource('test', 'blink');
-                                clearInterval(interval);
-                                removeTemplateResource('test', 'blink');
-                                console.log('test 模板注销。');
+                            initialize: (profile) => {
+                                console.log(`${profile.template} 模板初始化。`);
+                                $(document).attr('title', profile.name + '，我是你爹！');
+                                $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
+                                let daddyCensored = search.Replace(profile.daddy, '❤️');
+                                $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
 
+                                if (profile.daddyAvatar) {
+                                    $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                                    if (profile.avatar) {
+                                        $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
+                                    }
+                                    $(`.dh-template-${profile.template} .dh-avatar-group`).removeClass('hidden');
+                                }
+                                let markdownCensored = search.Replace(profile.markdown, '❤️');
+                                $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
+                                if (profile.cloudMusicId) {
+                                    $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=66"></iframe>`);
+                                    $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
+                                }
+                                if (profile.expiration) {
+                                    profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保留。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                                }
+                                initTemplateResource(`${profile.template}`);
+                                let interval = setInterval(() => {
+                                    $(`.dh-template-${profile.template} .dh-title`).hasClass('invisible') ? $(`.dh-template-${profile.template} .dh-title`).removeClass('invisible') : $(`.dh-template-${profile.template} .dh-title`).addClass('invisible');
+                                }, 1000);
+                                setTemplateResource(`${profile.template}`, 'blink', interval);
+                                $(`.dh-template-${profile.template}`).removeClass('hidden');
+                                console.log(`${profile.template} 模板初始化完成。`);
+                            },
+                            destroy: (profile) => {
+                                console.log(`${profile.template} 模板注销。`);
+                                // 也许应该确保先清空 interval 再操作元素，假如没清空 interval 还删除了元素，interval 内留了个引用，会有内存泄漏吧？
+                                // 当然也不是说现在一定就没有，我不是程序员，我啥也不懂
+                                let interval = getTemplateResource(`${profile.template}`, 'blink');
+                                clearInterval(interval);
+                                removeTemplateResource(`${profile.template}`, 'blink');
+                                $(`.dh-template-${profile.template} .dh-title-name`).text('');
+                                $(`.dh-template-${profile.template} .dh-daddy-name`).text('');
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', '');
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', '');
+                                $(`.dh-template-${profile.template} .dh-avatar-group`).addClass('hidden');
+                                $(`.dh-template-${profile.template} .dh-markdown`).html('');
+                                $(`.dh-template-${profile.template} .dh-music`).html('');
+                                $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
+                                $(`.dh-template-${profile.template} .dh-profile-info`).text('');
+                                $(`.dh-template-${profile.template} .dh-profile-info`).addClass('hidden');
+                                $(`.dh-template-${profile.template}`).addClass('hidden');
+                                console.log(`${profile.template} 模板注销完成。`);
                             }
                         }
                     }
                 ];
-                let currentTemplate = {};
+                let currentProfile = {};
                 let onlineProfiles = [];
                 dhGet({
                     entry: `/get-by-name/${nameStr}`,
