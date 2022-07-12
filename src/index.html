@@ -259,7 +259,7 @@
                         template: luckyTemplate.name
                     };
                     profile = profile || localProfile;
-                    profile.markdown = profile.markdown || localProfile.markdown;
+                    // profile.markdown = profile.markdown || localProfile.markdown; 已无必要，现在 markdown 在后端服务中是必须的
                     // profile.template 为空，或找不到对应模板，都会进入这里
                     if (typeof getTemplate(profile.template) === 'undefined') {
                         profile.template = localProfile.template;
