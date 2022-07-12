@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我是你爹！</title>
+    <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/unreset.css">
-    <link rel="stylesheet" href="./css/output.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.1.1/css/all.min.css">
-    <script src="./js/decode-punycode.js"></script>
+    <!-- <script src="./js/decode-punycode.js"></script> -->
+    <script src="./js/punycode.js"></script>
     <script src="./js/ToolGood.Words.StringSearch.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/dompurify/2.3.8/purify.min.js"></script>
@@ -17,9 +18,11 @@
 </head>
 
 <body>
-    <!-- 需要动态设置的类，先在这里添加以让 Tailwind CSS 编译 -->
+    <!-- 需要动态设置的类，先在这里添加以让 Tailwind CSS 编译，这种方法不知道行不行，我看有的样式会用变量 -->
     <div class="dh-tailwind-css-classes-init hidden">
-        <h1 class="invisible">我是你爹！</h1>
+        <!-- default 模板在动态调整 Markdown 图片时用到的样式，其中 max-w-3/5 在配置文件中定制 -->
+        <div class="dh-template-default-styles max-w-3/5 m-auto object-scale-down"></div>
+        <div class="dh-template-test-styles invisible"></div>
     </div>
     <div class="dh-top-screens absolute inset-0 z-50">
         <div class="dh-loading-screen absolute inset-0 bg-yellow-500">
@@ -57,6 +60,7 @@
         <!-- break-all：需要模板内所有的长串英文也换行 -->
         <div class="dh-template-default hidden absolute inset-0 break-all bg-blue-50">
             <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
+            <!-- 使用 Tailwind CSS 设计时以小屏优先，大屏加断点 -->
             <div
                 class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap">
                 <div class="dh-title ml-6 mb-12 text-left text-5xl font-bold ">
@@ -68,7 +72,8 @@
                 <div
                     class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
                     <!-- 又包了一层。hidden 和 flex 不能加在同一元素上，因为 Tailwind CSS 的 hidden 实际上是 display: none -->
-                    <div class="dh-avatar-group hidden absolute right-12 -mt-14">
+                    <!-- 现在提供了默认头像，不再使用 hidden -->
+                    <div class="dh-avatar-group absolute right-12 -mt-16">
                         <div class="dh-avatars flex flex-nowrap items-center">
                             <div
                                 class="dh-avatar w-14 h-14 mr-4 overflow-hidden rounded-md shadow-md border-2 border-stone-300">
@@ -81,7 +86,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dh-markdown unreset mb-6 flex-grow overflow-y-scroll overscroll-contain ">
+                    <!-- w-full? -->
+                    <div class="dh-markdown unreset mb-6 flex-grow overflow-y-auto overscroll-contain ">
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        <img class=" object-scale-down md:max-w-3/5 " src="https://z3.ax1x.com/2021/05/05/gMI67d.jpg"
+                            alt="">
                     </div>
                     <div class="dh-card-tail flex flex-nowrap justify-between">
                         <div class="dh-functions flex flex-nowrap">
@@ -101,7 +110,7 @@
                                 <div class="dh-daddy-name inline"></div>
                             </div>
                         </div>
-                        <div class="dh-profile-info hidden absolute right-4 bottom-4 text-right text-xs text-gray-500">
+                        <div class="dh-profile-info hidden absolute right-4 bottom-2 text-right text-xs text-gray-500">
                         </div>
                     </div>
                 </div>
@@ -133,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dh-markdown unreset mb-6 flex-grow overflow-y-scroll overscroll-contain ">
+                    <div class="dh-markdown unreset mb-6 flex-grow overflow-y-auto overscroll-contain ">
                     </div>
                     <div class="dh-card-tail flex flex-nowrap justify-between">
                         <div class="dh-functions flex flex-nowrap">
@@ -177,19 +186,20 @@
         // let hostTmp = '王刚.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'Hollis.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'xn--6qq986bm4cjwp.com';
-        let hostTmp = '大儿砸.xn--6qq986bm4cjwp.com';
+        let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
         // let hostTmp = '大儿.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'aaaaaa.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'bbbbbb.xn--6qq986bm4cjwp.com';
         let hostSplited = hostTmp.split('.');
-        // let hostSplited = window.location.host.split['.'];
+        // let hostSplited = punycode.ToUnicode(window.location.host).split['.'];
         if (hostSplited.length === 3) {
-            let namePunycode = hostSplited[0];
-            let nameStr = namePunycode;
-            if (namePunycode.indexOf('xn--') >= 0) {
-                let idn = new IdnMapping();
-                nameStr = idn.toUnicode(namePunycode);
-            }
+            let nameStr = hostSplited[0];
+            // let namePunycode = hostSplited[0];
+            // let nameStr = namePunycode;
+            // if (namePunycode.indexOf('xn--') >= 0) {
+            //     let idn = new IdnMapping();
+            //     nameStr = idn.toUnicode(namePunycode);
+            // }
             let bannedWords = ['毛泽东', '周恩来', '刘少奇', '朱德', '彭德怀', '林彪', '刘伯承', '陈毅', '贺龙', '聂荣臻', '徐向前', '罗荣桓', '叶剑英', '李大钊', '陈独秀', '孙中山', '孙文', '孙逸仙', '邓小平', '陈云', '江泽民', '李鹏', '朱镕基', '李瑞环', '尉健行', '李岚清', '胡锦涛', '罗干', '温家宝', '吴邦国', '曾庆红', '贾庆林', '黄菊', '吴官正', '李长春', '吴仪', '回良玉', '曾培炎', '曹刚川', '唐家璇', '华建敏', '陈至立', '张德江', '俞正声', '王乐泉', '刘云山', '王刚', '王兆国', '刘淇', '贺国强', '郭伯雄', '胡耀邦', '王乐泉', '王兆国', '习近平', '李克强', '张高丽', '刘延东', '彭丽媛', '王岐山', '华国锋', '胡耀邦', '习大大', '吴帮国', '无帮国', '无邦国', '无帮过', '瘟家宝', '假庆林', '甲庆林', '假青林', '离长春', '习远平', '袭近平', '李磕墙', '贺过墙', '和锅枪', '胡主席', '习主席', '毛主席'];
             let bannedWordsTr = ['毛澤東', '周恩來', '劉少奇', '朱德', '彭德懷', '林彪', '劉伯承', '陳毅', '賀龍', '聶榮臻', '徐向前', '羅榮桓', '葉劍英', '李大釗', '陳獨秀', '孫中山', '孫文', '孫逸仙', '鄧小平', '陳雲', '江澤民', '李鵬', '朱镕基', '李瑞環', '尉健行', '李嵐清', '胡錦濤', '羅幹', '溫家寶', '吳邦國', '曾慶紅', '賈慶林', '黃菊', '吳官正', '李長春', '吳儀', '回良玉', '曾培炎', '曹剛川', '唐家璇', '華建敏', '陳至立', '張德江', '俞正聲', '王樂泉', '劉雲山', '王剛', '王兆國', '劉淇', '賀國強', '郭伯雄', '胡耀邦', '王樂泉', '王兆國', '習近平', '李克強', '張高麗', '劉延東', '彭麗媛', '王岐山', '華國鋒', '胡耀邦', '習大大', '吳幫國', '無幫國', '無邦國', '無幫過', '瘟家寶', '假慶林', '甲慶林', '假青林', '離長春', '習遠平', '襲近平', '李磕墻', '賀過墻', '和鍋槍', '胡主席', '習主席', '毛主席'];
             bannedWords = bannedWords.concat(bannedWordsTr);
@@ -258,6 +268,7 @@
                         getTemplate(currentProfile.template).data.destroy(currentProfile);
                     }
                     getTemplate(profile.template).data.initialize(profile);
+                    $(document).attr('title', profile.name + '，我是你爹！');
                     if (profile.id) {
                         window.location.hash = profile.id;
                     }
@@ -324,22 +335,20 @@
                         data: {
                             markdowns: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
                             daddyName: '某神秘男子',
+                            avatar: './imgs/template-default/son.webp', // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
+                            daddyAvatar: './imgs/template-default/daddy.webp', // 这两个默认头像太二了，需要更新
                             initialize: (profile) => {
                                 console.log(`${profile.template} 模板初始化。`);
-                                $(document).attr('title', profile.name + '，我是你爹！');
                                 $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
                                 let daddyCensored = search.Replace(profile.daddy, '❤️');
                                 $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
-                                // 只有在老子有头像的情况下，儿子才能有头像，免得分不清谁是老子谁是儿子
-                                if (profile.daddyAvatar) {
-                                    $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
-                                    if (profile.avatar) {
-                                        $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
-                                    }
-                                    $(`.dh-template-${profile.template} .dh-avatar-group`).removeClass('hidden');
-                                }
+                                profile.avatar = profile.avatar || getTemplate(profile.template).data.avatar;
+                                profile.daddyAvatar = profile.daddyAvatar || getTemplate(profile.template).data.daddyAvatar;
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
                                 let markdownCensored = search.Replace(profile.markdown, '❤️');
-                                $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
+                                // $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
+                                // $(`.dh-template-${profile.template} .dh-markdown img`).addClass('max-w-md h-auto object-scale-down');
                                 if (profile.cloudMusicId) {
                                     $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=66"></iframe>`);
                                     $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
@@ -357,7 +366,6 @@
                                 $(`.dh-template-${profile.template} .dh-daddy-name`).text('');
                                 $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', '');
                                 $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', '');
-                                $(`.dh-template-${profile.template} .dh-avatar-group`).addClass('hidden');
                                 $(`.dh-template-${profile.template} .dh-markdown`).html('');
                                 $(`.dh-template-${profile.template} .dh-music`).html('');
                                 $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
