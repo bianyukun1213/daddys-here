@@ -19,8 +19,12 @@
 <body>
     <!-- 需要动态设置的类，先在这里添加以让 Tailwind CSS 编译，这种方法不知道行不行，我看有的样式会用变量 -->
     <div class="dh-tailwind-css-classes-init hidden">
-        <!-- default 模板在动态调整 Markdown 图片时用到的样式，其中 lg:max-w-3/5 在配置文件中定制，并且已经试验过了，断点也是要编译的 -->
-        <div class="dh-template-default-styles lg:max-w-3/5 mx-auto my-4 object-scale-down"></div>
+        <!-- forerunner 模板在动态调整 Markdown 图片时用到的样式，其中 lg:max-w-3/5 在配置文件中定制，并且已经试验过了，断点也是要编译的 -->
+        <!-- text-blue-500 是 Markdown 解析的链接的颜色 -->
+        <!-- disabled 是正在提交数据时用在按钮上的 -->
+        <div
+            class="dh-template-forerunner-styles lg:max-w-3/5 mx-auto my-4 object-scale-down text-blue-500 disabled:opacity-50">
+        </div>
         <div class="dh-template-test-styles invisible"></div>
     </div>
     <div class="dh-top-screens absolute inset-0 z-50">
@@ -59,19 +63,20 @@
                 class="dh-operation-panel w-5/6 h-4/5 md:w-2/5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white">
                 <!-- 添加 z-10 以免被下方绝对定位元素覆盖 -->
                 <div
-                    class="dh-operation-panel-close absolute right-0 w-12 h-12 flex items-center justify-center z-10 text-3xl text-red-500 hover:text-red-600">
+                    class="dh-operation-panel-close absolute right-0 w-12 h-12 flex items-center justify-center z-10 text-3xl text-red-500 hover:text-red-600 disabled:opacity-50">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <div class="dh-operation-section-profile-switch hidden absolute inset-0">
                     <div class="dh-profile-switch w-full h-full flex flex-col flex-nowrap p-6">
                         <div class="dh-profile-switch-title mb-6 text-2xl font-bold">切换档案</div>
                         <!-- 控件区域手动添加 block 类来使元素垂直排列，不使用 flex 因为 flex 在元素多的情况下会使元素 shrink -->
-                        <div class="dh-profile-switch-elements flex-grow overflow-y-auto overscroll-contain space-y-4"
+                        <div class="dh-profile-switch-elements flex-grow overflow-y-auto overscroll-contain space-y-2"
                             autocomplete="off" autocomplete="off">
-                            <select class="dh-profile-switch-selections block w-64 h-6">
+                            <!-- select 加 px-1，文本框加 px-2 -->
+                            <select class="dh-profile-switch-selections block w-64 h-8 px-1">
                             </select>
                             <button
-                                class="dh-profile-switch-confirm block w-24 h-10 rounded text-white bg-green-500 hover:bg-green-600">确定</button>
+                                class="dh-profile-switch-confirm block w-24 h-10 rounded text-white bg-green-500 hover:bg-green-600 disabled:opacity-50">确定</button>
                         </div>
                     </div>
                 </div>
@@ -79,41 +84,52 @@
                     <div class="dh-profile-edit w-full h-full flex flex-col flex-nowrap p-6">
                         <div class="dh-profile-edit-title mb-6 text-2xl font-bold">编辑档案</div>
                         <!-- 控件区域手动添加 block 类来使元素垂直排列，不使用 flex 因为 flex 在元素多的情况下会使元素 shrink -->
-                        <div class="dh-profile-edit-elements flex-grow overflow-y-auto overscroll-contain space-y-4">
-                            <div class="dh-profile-edit-types-title text-md">操作</div>
-                            <select class="dh-profile-edit-types block w-64 h-8" autocomplete="off">
-                                <option value="create">新建一份云端档案</option>
-                                <option value="update">修改当前云端档案</option>
-                                <option value="delete">删除当前云端档案</option>
+                        <div class="dh-profile-edit-elements flex-grow overflow-y-auto overscroll-contain space-y-2">
+                            <div class="dh-profile-edit-types-title w-64 text-md">操作</div>
+                            <!-- select 加 px-1，文本框加 px-2 -->
+                            <select class="dh-profile-edit-types block w-64 h-8 px-1" autocomplete="off">
+                                <option value="create">新建云端档案</option>
+                                <option value="update">修改此云端档案</option>
+                                <option value="delete">删除此云端档案</option>
                             </select>
-                            <div class="dh-profile-edit-name-title text-md">子女姓名*</div>
-                            <input class="dh-profile-edit-name block w-64 h-8 outline-none border-2 border-gray-500"
-                                type="text" autocomplete="off">
-                            <div class="dh-profile-edit-daddy-name-title text-md">父亲姓名*</div>
-                            <input
-                                class="dh-profile-edit-daddy-name block w-64 h-8 outline-none border-2 border-gray-500"
-                                type="text" autocomplete="off">
-                            <div class="dh-profile-edit-markdown-title text-md">文本（支持 Markdown）*</div>
-                            <textarea
-                                class="dh-profile-edit-markdown w-64 h-64 resize outline-none border-2 border-gray-500"
-                                autocomplete="off"></textarea>
-                            <div class="dh-profile-edit-background-title text-md">背景图片</div>
-                            <input
-                                class="dh-profile-edit-background block w-64 h-8 outline-none border-2 border-gray-500"
-                                type="text" autocomplete="off">
-                            <div class="dh-profile-edit-avatar-title text-md">子女头像</div>
-                            <input class="dh-profile-edit-avatar block w-64 h-8 outline-none border-2 border-gray-500"
-                                type="text" autocomplete="off">
-                            <div class="dh-profile-edit-daddy-avatar-title text-md">父亲头像</div>
-                            <input
-                                class="dh-profile-edit-daddy-avatar block w-64 h-8 outline-none border-2 border-gray-500"
-                                type="text" autocomplete="off">
-                            <div class="dh-profile-edit-cloud-music-id-title text-md">网易云音乐 Id</div>
-                            <input
-                                class="dh-profile-edit-cloud-music-id block w-64 h-8 outline-none border-2 border-gray-500"
-                                type="text" autocomplete="off">
+                            <div class="dh-profile-edit-data space-y-2">
+                                <div class="dh-profile-edit-name-title w-64 text-md">子女姓名*</div>
+                                <input
+                                    class="dh-profile-edit-name block w-64 h-8 px-1 outline-none border-2 border-gray-500"
+                                    type="text" autocomplete="off">
+                                <div class="dh-profile-edit-daddy-name-title w-64 text-md">父亲姓名*</div>
+                                <input
+                                    class="dh-profile-edit-daddy-name block w-64 h-8 px-2 outline-none border-2 border-gray-500"
+                                    type="text" autocomplete="off">
+                                <div class="dh-profile-edit-markdown-title w-64 text-md">文本（支持 Markdown）*</div>
+                                <textarea
+                                    class="dh-profile-edit-markdown w-64 h-64 px-2 resize outline-none border-2 border-gray-500"
+                                    autocomplete="off"></textarea>
+                                <div class="dh-profile-edit-template-title w-64 text-md">模板*</div>
+                                <!-- select 加 px-1，文本框加 px-2 -->
+                                <select class="dh-profile-edit-template block w-64 h-8 px-2" autocomplete="off">
+                                </select>
+                                <div class="dh-profile-edit-background-title w-64 text-md">背景图片</div>
+                                <input
+                                    class="dh-profile-edit-background block w-64 h-8 px-2 outline-none border-2 border-gray-500"
+                                    type="text" autocomplete="off">
+                                <div class="dh-profile-edit-avatar-title w-64 text-md">子女头像</div>
+                                <input
+                                    class="dh-profile-edit-avatar block w-64 h-8 px-2 outline-none border-2 border-gray-500"
+                                    type="text" autocomplete="off">
+                                <div class="dh-profile-edit-daddy-avatar-title w-64 text-md">父亲头像</div>
+                                <input
+                                    class="dh-profile-edit-daddy-avatar block w-64 h-8 px-2 outline-none border-2 border-gray-500"
+                                    type="text" autocomplete="off">
+                                <div class="dh-profile-edit-cloud-music-id-title w-64 text-md">网易云音乐 Id</div>
+                                <input
+                                    class="dh-profile-edit-cloud-music-id block w-64 h-8 px-2 outline-none border-2 border-gray-500"
+                                    type="text" autocomplete="off">
+                            </div>
+                            <div class="dh-profile-edit-warning w-64 text-md font-bold text-red-500">
+                                标注有 * 的为必填项。<br>本平台禁止提交涉政、涉恐、涉诈、黄赌毒等违法内容，违者将接受删除内容、屏蔽页面等处罚，点击“确定”即代表您同意相关规定。</div>
                             <button
-                                class="dh-profile-edit-confirm block w-24 h-10 rounded text-white bg-green-500 hover:bg-green-600">确定</button>
+                                class="dh-profile-edit-confirm block w-24 h-10 rounded text-white bg-green-500 hover:bg-green-600 disabled:opacity-50">确定</button>
                         </div>
                     </div>
                 </div>
@@ -121,11 +137,15 @@
         </div>
     </div>
     <div class="dh-root absolute inset-0">
-        <!-- 以 default 为准 -->
+        <div
+            class="dh-about-btn absolute right-0 bottom-0 w-14 h-14 z-40 flex items-center justify-center text-3xl text-red-500">
+            <i class="fa-solid fa-circle-info"></i>
+        </div>
+        <!-- 以 forerunner 为准 -->
         <!-- break-all：需要模板内所有的长串英文也换行 -->
-        <!-- 希望 default 模板占一屏，因此加 overflow-hidden 以防止内容溢出，一屏装不下 -->
+        <!-- 希望 forerunner 模板占一屏，因此加 overflow-hidden 以防止内容溢出，一屏装不下 -->
         <div
-            class="dh-template-default hidden absolute inset-0 break-all overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed bg-white">
+            class="dh-template-forerunner hidden absolute inset-0 break-all overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed bg-white">
             <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
             <!-- 使用 Tailwind CSS 设计时以小屏优先，大屏加断点 -->
             <div
@@ -180,26 +200,20 @@
             <div class="dh-music hidden absolute bottom-0">
             </div>
         </div>
-        <div
+        <!-- <div
             class="dh-template-test hidden absolute inset-0 break-all overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed bg-white">
-            <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
-            <!-- 使用 Tailwind CSS 设计时以小屏优先，大屏加断点 -->
             <div
                 class="dh-content absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 md:w-3/5 h-5/6 md:h-4/5 flex flex-col flex-nowrap">
                 <div class="dh-title ml-6 mb-12 text-left text-5xl font-bold">
                     <div class="dh-title-name inline"></div>
                     <div class="dh-title-text inline">，我是你爹！</div>
                 </div>
-                <!-- card 的 overflow-hidden 不能省，省了就溢出，因为 card 无固定高度，markdown 也无固定高度 -->
                 <div
                     class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
-                    <!-- 又包了一层。hidden 和 flex 不能加在同一元素上，因为 Tailwind CSS 的 hidden 实际上是 display: none -->
-                    <!-- 现在提供了默认头像，不再使用 hidden -->
                     <div class="dh-avatar-group absolute right-12 -mt-16">
                         <div class="dh-avatars flex flex-nowrap items-center">
                             <div
                                 class="dh-avatar w-14 h-14 mr-4 overflow-hidden rounded-md shadow-md border-2 border-stone-300">
-                                <!-- 似乎指定了宽高，object-cover 才会工作 -->
                                 <img class="dh-avatar-img h-14 w-full object-cover" />
                             </div>
                             <div
@@ -222,7 +236,6 @@
                             </div>
                         </div>
                         <div class="dh-daddy text-right flex items-center justify-center text-xl font-bold">
-                            <!-- 用 flex 是为了文字垂直居中，但会导致里面两个行内 div 在宽度不足时各自换行，需要用 wrapper 修复 -->
                             <div class="dh-daddy-wrapper">
                                 <div class="dh-daddy-text inline">爱你的爸爸，</div>
                                 <div class="dh-daddy-name inline"></div>
@@ -235,7 +248,7 @@
             </div>
             <div class="dh-music hidden absolute bottom-0">
             </div>
-        </div>
+        </div> -->
         <!-- 不加 overflow-hidden 的话，浏览器过窄，文字换行溢出露馅 -->
         <div class="dh-pale absolute inset-0 -z-50 overflow-hidden">
             空白 - 顷刻间，你被抽离原来的维度，马丁内斯的旧影仍在脑际徘徊，但在这里，占据你的是*毫无意义*的空白。
@@ -270,6 +283,9 @@
     </div>
     <script>
         console.log('瞅什么瞅，我是你爹！');
+        $('.dh-about-btn').click(() => {
+            alert('仅为玩笑，切莫当真。如果您觉得权力、名誉等受到侵犯，或发现了不合适甚至违法的内容，请联系 bianyukun1213@outlook.com，我会尽快删除。十分抱歉并感谢您的反馈！');
+        });
         // let hostTmp = 'xn--vjqt50bik1b.xn--6qq986bm4cjwp.com';
         // let hostTmp = '王刚.xn--6qq986bm4cjwp.com';
         // let hostTmp = 'Hollis.我是你爹.com';
@@ -281,6 +297,11 @@
         let hostSplited = hostTmp.split('.');
         // let hostSplited = punycode.ToUnicode(window.location.host).split['.'];
         if (hostSplited.length === 3) {
+            const NAME_LENGTH = 16;
+            const DADDY_NAME_LENGTH = 16;
+            const MARKDOWN_LENGTH = 1000;
+            const MARKDOWN_DEMO = '在这里你可以写普通的文本，也可以写 Markdown 格式的文本。\n\n我这就教你怎么写。\n\n请记住，段落之间留有一行，就像这样。\n\n# 井号和空格打头表示一级标题\n\n## 两个井号就是二级标题\n\n### 以此类推……\n\n星号包裹文字，使之变成*斜体字*。\n\n两边各包两个星号，那么它就是**粗体字**。\n\n要使用~~删除线~~，两边各包两个波浪号。\n\n- 减号和空格打头表示这是一个无序列表，各项之间无需再留一行\n- 你试试\n\n1. 数字、点和空格打头，就成了有序列表\n2. 这是第二项\n\n还可以放图片：\n\n![这里写替换文本，在图片加载失败时显示，盲人的读屏器也会读我，小括号内写图片 Url](https://s1.ax1x.com/2022/07/12/jgGz1s.png)\n\n还有更多用法，可以看 [这个教程](https://www.runoob.com/markdown/md-tutorial.html)。这里碍于篇幅就不一一介绍了。对了，链接的格式和图片很像，只不过没有前面的叹号。\n';
+            const CLOUD_MUSIC_ID_LENGTH = 24;
             let nameStr = hostSplited[0];
             // let namePunycode = hostSplited[0];
             // let nameStr = namePunycode;
@@ -293,24 +314,28 @@
             bannedWords = bannedWords.concat(bannedWordsTr);
             let search = new StringSearch();
             search.SetKeywords(bannedWords);
-            let invalid = search.ContainsAny(nameStr) || nameStr.length > 10;
+            let invalid = search.ContainsAny(nameStr) || nameStr.length > NAME_LENGTH;
             if (!invalid) {
-
-                // $('.dh-function-btn-switch-profile').click(() => {
-                //     let mk = $('.dh-ta').val();
-                //     dhPost({
-                //         entry: '/create',
-                //         data: JSON.stringify({
-                //             name: 'bbbbbb',
-                //             daddy: 'sbsbb',
-                //             markdown: mk
-                //         })
-                //     });
-                // });
-                // $('.dh-btn2').click(() => {
-                //     switchProfile();
-                // });
-                let closeOperationScreen = () => {
+                const IsDataValidToSubmit = () => {
+                    let reg = /(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)+\.(jpg|png|webp|gif)/;
+                    let nameValid, daddyNameValid, markdownValid, backgroundValid, avatarValid, daddyAvatarValid, cloudMusicIdValid;
+                    let name = $('.dh-profile-edit-name').val();
+                    nameValid = !search.ContainsAny(name) && name.length > 0 && name.length <= NAME_LENGTH;
+                    let daddyName = $('.dh-profile-edit-daddy-name').val();
+                    daddyNameValid = !search.ContainsAny(daddyName) && daddyName.length > 0 && daddyName.length <= DADDY_NAME_LENGTH;
+                    let markdown = $('.dh-profile-edit-markdown').val();
+                    markdownValid = !search.ContainsAny(markdown) && markdown.length > 0 && markdown.length <= MARKDOWN_LENGTH;
+                    let background = $('.dh-profile-edit-background').val();
+                    backgroundValid = background === '' ? true : reg.test(background);
+                    let avatar = $('.dh-profile-edit-avatar').val();
+                    avatarValid = avatar === '' ? true : reg.test(avatar);
+                    let daddyAvatar = $('.dh-profile-edit-daddy-avatar').val();
+                    daddyAvatarValid = daddyAvatar === '' ? true : reg.test(daddyAvatar);
+                    let cloudMusicId = $('.dh-profile-edit-cloud-music-id').val();
+                    cloudMusicIdValid = cloudMusicId === '' ? true : cloudMusicId.length <= CLOUD_MUSIC_ID_LENGTH;
+                    return !!(nameValid && daddyNameValid && markdownValid && backgroundValid && avatarValid && daddyAvatarValid && cloudMusicIdValid);
+                };
+                const closeOperationScreen = () => {
                     $('.dh-profile-edit-name').val('');
                     $('.dh-profile-edit-daddy-name').val('');
                     $('.dh-profile-edit-markdown').val('');
@@ -318,6 +343,7 @@
                     $('.dh-profile-edit-avatar').val('');
                     $('.dh-profile-edit-daddy-avatar').val('');
                     $('.dh-profile-edit-daddy-cloud-music-id').val('');
+                    $('.dh-operation-section-profile-edit').addClass('hidden');
                     $('.dh-operation-section-profile-switch').addClass('hidden');
                     $('.dh-operation-screen').addClass('hidden');
                     $('.dh-top-screens').addClass('hidden');
@@ -336,6 +362,8 @@
                     $('.dh-operation-section-profile-switch').removeClass('hidden');
                     $('.dh-operation-screen').removeClass('hidden');
                     $('.dh-top-screens').removeClass('hidden');
+                    // 滚动的这句必须放在取消隐藏之后
+                    $('.dh-profile-switch-elements').scrollTop(0);
                 });
                 // 切换档案确认事件
                 $('.dh-profile-switch-confirm').click(() => {
@@ -355,43 +383,39 @@
                 });
                 // 编辑档案按钮点击事件
                 $('.dh-function-btn-edit-profile').click(() => {
-                    // if (currentProfile.id) {
-                    //     $('.dh-profile-edit-types option[value="update"]').removeAttr('disabled', 'disabled');
-                    //     $('.dh-profile-edit-types option[value="delete"]').removeAttr('disabled', 'disabled');
-                    // }
-                    // else {
-                    //     $('.dh-profile-edit-types option[value="update"]').attr('disabled', 'disabled');
-                    //     $('.dh-profile-edit-types option[value="delete"]').attr('disabled', 'disabled');
-                    // }
+                    if (currentProfile.id) {
+                        $('.dh-profile-edit-types option[value="update"]').removeAttr('disabled', 'disabled');
+                        $('.dh-profile-edit-types option[value="delete"]').removeAttr('disabled', 'disabled');
+                    }
+                    else {
+                        $('.dh-profile-edit-types option[value="update"]').attr('disabled', 'disabled');
+                        $('.dh-profile-edit-types option[value="delete"]').attr('disabled', 'disabled');
+                    }
+                    $('.dh-profile-edit-template option').remove();
+                    for (let i = 0, length = templates.length; i < length; i++) {
+                        $('.dh-profile-edit-template').append(`<option value="${templates[i].name}">${templates[i].humanName}${templates[i].name === currentProfile.template ? '（当前）' : ''}</option>`);
+                    }
+                    $('.dh-profile-edit-template').val(currentProfile.template);
                     $('.dh-profile-edit-types').val('create'); // 设置 value 为 'create' 的一项选中
+                    $('.dh-profile-edit-markdown').val(MARKDOWN_DEMO); // 提供 Markdown 示例
                     $('.dh-operation-section-profile-edit').removeClass('hidden');
                     $('.dh-operation-screen').removeClass('hidden');
                     $('.dh-top-screens').removeClass('hidden');
+                    // 滚动的这句必须放在取消隐藏之后
+                    $('.dh-profile-edit-elements').scrollTop(0);
                 });
                 // 编辑档案操作类型变更事件
                 $('.dh-profile-edit-types').change(() => {
                     let value = $('.dh-profile-edit-types').val();
                     if (value === 'delete') {
-                        $('.dh-profile-edit-name-title').addClass('hidden');
-                        $('.dh-profile-edit-daddy-name-title').addClass('hidden');
-                        $('.dh-profile-edit-markdown-title').addClass('hidden');
-                        $('.dh-profile-edit-background-title').addClass('hidden');
-                        $('.dh-profile-edit-avatar-title').addClass('hidden');
-                        $('.dh-profile-edit-daddy-avatar-title').addClass('hidden');
-                        $('.dh-profile-edit-cloud-music-id-title').addClass('hidden');
-                        $('.dh-profile-edit-name').addClass('hidden');
-                        $('.dh-profile-edit-daddy-name').addClass('hidden');
-                        $('.dh-profile-edit-markdown').addClass('hidden');
-                        $('.dh-profile-edit-background').addClass('hidden');
-                        $('.dh-profile-edit-avatar').addClass('hidden');
-                        $('.dh-profile-edit-daddy-avatar').addClass('hidden');
-                        $('.dh-profile-edit-cloud-music-id').addClass('hidden');
+                        $('.dh-profile-edit-data').addClass('hidden');
                     }
                     else {
                         if (value === 'update') {
                             $('.dh-profile-edit-name').val(currentProfile.name);
                             $('.dh-profile-edit-daddy-name').val(currentProfile.daddy);
                             $('.dh-profile-edit-markdown').val(currentProfile.markdown);
+                            $('.dh-profile-edit-template').val(currentProfile.template);
                             $('.dh-profile-edit-background').val(currentProfile.background);
                             $('.dh-profile-edit-avatar').val(currentProfile.avatar);
                             $('.dh-profile-edit-daddy-avatar').val(currentProfile.daddyAvatar);
@@ -399,30 +423,115 @@
                         } else {
                             $('.dh-profile-edit-name').val('');
                             $('.dh-profile-edit-daddy-name').val('');
-                            $('.dh-profile-edit-markdown').val('');
+                            $('.dh-profile-edit-markdown').val(MARKDOWN_DEMO); // 提供 Markdown 示例
+                            $('.dh-profile-edit-template').val(currentProfile.template);
                             $('.dh-profile-edit-background').val('');
                             $('.dh-profile-edit-avatar').val('');
                             $('.dh-profile-edit-daddy-avatar').val('');
                             $('.dh-profile-edit-daddy-cloud-music-id').val('');
                         }
-                        $('.dh-profile-edit-name-title').removeClass('hidden');
-                        $('.dh-profile-edit-daddy-name-title').removeClass('hidden');
-                        $('.dh-profile-edit-markdown-title').removeClass('hidden');
-                        $('.dh-profile-edit-background-title').removeClass('hidden');
-                        $('.dh-profile-edit-avatar-title').removeClass('hidden');
-                        $('.dh-profile-edit-daddy-avatar-title').removeClass('hidden');
-                        $('.dh-profile-edit-cloud-music-id-title').removeClass('hidden');
-                        $('.dh-profile-edit-name').removeClass('hidden');
-                        $('.dh-profile-edit-daddy-name').removeClass('hidden');
-                        $('.dh-profile-edit-markdown').removeClass('hidden');
-                        $('.dh-profile-edit-background').removeClass('hidden');
-                        $('.dh-profile-edit-avatar').removeClass('hidden');
-                        $('.dh-profile-edit-daddy-avatar').removeClass('hidden');
-                        $('.dh-profile-edit-cloud-music-id').removeClass('hidden');
+                        $('.dh-profile-edit-data').removeClass('hidden');
                     }
                 });
-                // 切换档案确认事件
-                // ……
+                // 编辑档案确认事件
+                $('.dh-profile-edit-confirm').click(() => {
+                    if (confirm('此操作无法撤回，数据无法恢复到之前的状态，是否继续？')) {
+                        let name = $('.dh-profile-edit-name').val();
+                        let daddyName = $('.dh-profile-edit-daddy-name').val();
+                        let markdown = $('.dh-profile-edit-markdown').val();
+                        let template = $('.dh-profile-edit-template').val();
+                        let background = $('.dh-profile-edit-background').val();
+                        let avatar = $('.dh-profile-edit-avatar').val();
+                        let daddyAvatar = $('.dh-profile-edit-daddy-avatar').val();
+                        let cloudMusicId = $('.dh-profile-edit-cloud-music-id').val();
+                        let value = $('.dh-profile-edit-types').val();
+                        if (value === 'create') {
+                            if (!IsDataValidToSubmit()) {
+                                alert('数据错误或不适宜！');
+                                return;
+                            }
+                            $('.dh-operation-panel-close').attr('disabled', 'disabled');
+                            $('.dh-profile-edit-confirm').attr('disabled', 'disabled');
+                            dhPost({
+                                entry: '/create',
+                                data: JSON.stringify({
+                                    name: name,
+                                    daddy: daddyName,
+                                    markdown: markdown,
+                                    template: template,
+                                    background: background,
+                                    avatar: avatar,
+                                    daddyAvatar: daddyAvatar,
+                                    cloudMusicId: cloudMusicId
+                                }),
+                                success: (res) => {
+                                    alert('成功！');
+                                    closeOperationScreen();
+                                    window.location.reload();
+                                },
+                                fail: (status, code, msg) => {
+                                    alert(`失败：${code ? msg : status}。`)
+                                },
+                                complete: () => {
+                                    $('.dh-operation-panel-close').removeAttr('disabled');
+                                    $('.dh-profile-edit-confirm').removeAttr('disabled');
+                                }
+                            });
+                        }
+                        if (value === 'update') {
+                            if (!IsDataValidToSubmit()) {
+                                alert('数据错误或不适宜！');
+                                return;
+                            }
+                            $('.dh-operation-panel-close').attr('disabled', 'disabled');
+                            $('.dh-profile-edit-confirm').attr('disabled', 'disabled');
+                            dhPut({
+                                entry: `/update-by-id/${currentProfile.id}`,
+                                data: JSON.stringify({
+                                    name: name,
+                                    daddy: daddyName,
+                                    markdown: markdown,
+                                    template: template,
+                                    background: background,
+                                    avatar: avatar,
+                                    daddyAvatar: daddyAvatar,
+                                    cloudMusicId: cloudMusicId
+                                }),
+                                success: (res) => {
+                                    alert('成功！');
+                                    closeOperationScreen();
+                                    window.location.reload();
+                                },
+                                fail: (status, code, msg) => {
+                                    alert(`失败：${code ? msg : status}。`)
+                                },
+                                complete: () => {
+                                    $('.dh-operation-panel-close').removeAttr('disabled');
+                                    $('.dh-profile-edit-confirm').removeAttr('disabled');
+                                }
+                            });
+                        }
+                        if (value === 'delete') {
+                            $('.dh-operation-panel-close').attr('disabled', 'disabled');
+                            $('.dh-profile-edit-confirm').attr('disabled', 'disabled');
+                            dhDelete({
+                                entry: `/delete-by-id/${currentProfile.id}`,
+                                success: (res) => {
+                                    alert('成功！');
+                                    closeOperationScreen();
+                                    window.location.reload();
+                                },
+                                fail: (status, code, msg) => {
+                                    alert(`失败：${code ? msg : status}。`)
+                                },
+                                complete: () => {
+                                    $('.dh-operation-panel-close').removeAttr('disabled');
+                                    $('.dh-profile-edit-confirm').removeAttr('disabled');
+                                }
+                            });
+                        }
+                    }
+                });
 
 
 
@@ -430,10 +539,10 @@
 
                 // 先随机生成一套数据，然后发送请求，查无此人或出错都使用随机数据
                 // 如果没出错，就选择第一个结果（如果有 hash，选择 hash 对应），设置 hash，提供切换功能，也可切换到随机数据
-                let randomItem = (array) => {
+                const randomItem = (array) => {
                     return array[Math.floor((Math.random() * array.length))];
                 };
-                let getTemplate = (name) => {
+                const getTemplate = (name) => {
                     for (let i = 0, length = templates.length; i < length; i++) {
                         if (name === templates[i].name) {
                             return templates[i];
@@ -441,21 +550,21 @@
                     }
                 };
                 // 模板资源相关函数
-                let initTemplateResource = (name) => {
+                const initTemplateResource = (name) => {
                     templateResources[`template-${name}-resource`] = {};
                 };
-                let getTemplateResource = (name, resourceName) => {
+                const getTemplateResource = (name, resourceName) => {
                     return templateResources[`template-${name}-resource`][resourceName];
                 };
-                let setTemplateResource = (name, resourceName, resource) => {
+                const setTemplateResource = (name, resourceName, resource) => {
                     templateResources[`template-${name}-resource`][resourceName] = resource;
                 };
-                let removeTemplateResource = (name, resourceName) => {
+                const removeTemplateResource = (name, resourceName) => {
                     delete templateResources[`template-${name}-resource`].resourceName;
                 };
-                let switchProfile = (profile) => {
+                const switchProfile = (profile) => {
                     let markdowns = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-                    let daddyNames = ['利维亚的杰洛特', '达斯·维达', '布克·德怀特', '伊莱·万斯', '奎托斯', '丁·贾伦', '克利福德·昂格尔'];
+                    let daddyNames = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '猛♂男'];
                     // 注意，这里 profile 里的 template 为与后端同一，都只是模板名称，需要获取模板对象使用 getTemplate
                     let luckyTemplate = randomItem(templates);
                     let luckyMarkdown = randomItem(markdowns);
@@ -485,7 +594,7 @@
                     }
                     currentProfile = profile;
                 };
-                let dhRequest = (options) => {
+                const dhRequest = (options) => {
                     const BASE_URL = 'https://daddyshere.hollisdevhub.com/api/sons';
                     options = options || {};
                     let entry = options.entry || '';
@@ -529,23 +638,34 @@
                         }
                     }).done(success).fail(fail).always(complete);
                 };
-                let dhGet = (options) => {
+                const dhGet = (options) => {
                     options = options || {};
                     options.method = 'GET';
                     dhRequest(options);
                 };
-                let dhPost = (options) => {
+                const dhPost = (options) => {
                     options = options || {};
                     options.method = 'POST';
                     dhRequest(options);
                 };
+                const dhPut = (options) => {
+                    options = options || {};
+                    options.method = 'PUT';
+                    dhRequest(options);
+                };
+                const dhDelete = (options) => {
+                    options = options || {};
+                    options.method = 'DELETE';
+                    dhRequest(options);
+                };
                 let templateResources = {};
-                let templates = [
+                const templates = [
                     {
-                        name: 'default',
+                        name: 'forerunner',
+                        humanName: '先行者',
                         data: {
-                            avatars: [['./imgs/template-default/daddy-1.webp', './imgs/template-default/son-1.webp'], ['./imgs/template-default/daddy-2.png', './imgs/template-default/son-2.jpg']], // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
-                            backgrounds: ['./imgs/template-default/bg-1.jpg', './imgs/template-default/bg-2.jpg']
+                            avatars: [['./imgs/template-forerunner/daddy-1.webp', './imgs/template-forerunner/son-1.webp'], ['./imgs/template-forerunner/daddy-2.png', './imgs/template-forerunner/son-2.jpg']], // forerunner 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
+                            backgrounds: ['./imgs/template-forerunner/bg-1.jpg', './imgs/template-forerunner/bg-2.jpg']
                         },
                         initialize: function (profile) {
                             // 用匿名函数的话，this 就指向 window 而不是模板对象了
@@ -576,12 +696,13 @@
                             let markdownCensored = search.Replace(profile.markdown, '❤️');
                             $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
                             $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
+                            $(`.dh-template-${profile.template} .dh-markdown a`).addClass('text-blue-500');
                             if (profile.cloudMusicId) {
                                 $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=32"></iframe>`);
                                 $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
                             }
                             if (profile.expiration) {
-                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保存。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('云端档案，网友定制，长期保存。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`云端档案，网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
                             }
                             else {
                                 $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案，即时生成。');
@@ -603,77 +724,78 @@
                             console.log(`${profile.template} 模板注销完成。`);
                         }
                     },
-                    {
-                        name: 'test',
-                        data: {
-                            avatars: [['./imgs/template-default/daddy-1.webp', './imgs/template-default/son-1.webp'], ['./imgs/template-default/daddy-2.png', './imgs/template-default/son-2.jpg']], // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
-                            backgrounds: ['./imgs/template-default/bg-1.jpg', './imgs/template-default/bg-2.jpg']
-                        },
-                        initialize: function (profile) {
-                            console.log(`${profile.template} 模板初始化。`);
-                            $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
-                            let daddyCensored = search.Replace(profile.daddy, '❤️');
-                            $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
-                            let luckyAvatar = randomItem(this.data.avatars);
-                            if (profile.daddyAvatar) {
-                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
-                            }
-                            else {
-                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', luckyAvatar[0]);
-                            }
-                            if (profile.avatar) {
-                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
-                            }
-                            else {
-                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', luckyAvatar[1]);
-                            }
-                            let luckyBackground = randomItem(this.data.backgrounds);
-                            if (profile.background) {
-                                $(`.dh-template-${profile.template}`).css('background-image', `url(${profile.background})`);
-                            }
-                            else {
-                                $(`.dh-template-${profile.template}`).css('background-image', `url(${luckyBackground})`);
-                            }
-                            let markdownCensored = search.Replace(profile.markdown, '❤️');
-                            $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
-                            $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
-                            if (profile.cloudMusicId) {
-                                $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=32"></iframe>`);
-                                $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
-                            }
-                            if (profile.expiration) {
-                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保存。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
-                            }
-                            else {
-                                $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案，即时生成。');
-                            }
-                            initTemplateResource(`${profile.template}`);
-                            let interval = setInterval(() => {
-                                $(`.dh-template-${profile.template} .dh-title`).hasClass('invisible') ? $(`.dh-template-${profile.template} .dh-title`).removeClass('invisible') : $(`.dh-template-${profile.template} .dh-title`).addClass('invisible');
-                            }, 1000);
-                            setTemplateResource(`${profile.template}`, 'blink', interval);
-                            $(`.dh-template-${profile.template}`).removeClass('hidden');
-                            console.log(`${profile.template} 模板初始化完成。`);
-                        },
-                        destroy: function (profile) {
-                            console.log(`${profile.template} 模板注销。`);
-                            // 也许应该确保先清空 interval 再操作元素，假如没清空 interval 还删除了元素，interval 内留了个引用，会有内存泄漏吧？
-                            // 当然也不是说现在一定就没有，我不是程序员，我啥也不懂
-                            let interval = getTemplateResource(`${profile.template}`, 'blink');
-                            clearInterval(interval);
-                            removeTemplateResource(`${profile.template}`, 'blink');
-                            $(`.dh-template-${profile.template} .dh-title-name`).text('');
-                            $(`.dh-template-${profile.template} .dh-daddy-name`).text('');
-                            $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', '');
-                            $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', '');
-                            $(`.dh-template-${profile.template} .dh-markdown`).html('');
-                            $(`.dh-template-${profile.template} .dh-music`).html('');
-                            $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
-                            $(`.dh-template-${profile.template} .dh-profile-info`).text('');
-                            $(`.dh-template-${profile.template}`).addClass('hidden');
-                            console.log(`${profile.template} 模板注销完成。`);
-                        }
-                    }
+                    // {
+                    //     name: 'test',
+                    //     humanName: '测试',
+                    //     data: {
+                    //         avatars: [['./imgs/template-forerunner/daddy-1.webp', './imgs/template-forerunner/son-1.webp'], ['./imgs/template-forerunner/daddy-2.png', './imgs/template-forerunner/son-2.jpg']], // forerunner 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
+                    //         backgrounds: ['./imgs/template-forerunner/bg-1.jpg', './imgs/template-forerunner/bg-2.jpg']
+                    //     },
+                    //     initialize: function (profile) {
+                    //         console.log(`${profile.template} 模板初始化。`);
+                    //         $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
+                    //         let daddyCensored = search.Replace(profile.daddy, '❤️');
+                    //         $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
+                    //         let luckyAvatar = randomItem(this.data.avatars);
+                    //         if (profile.daddyAvatar) {
+                    //             $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                    //         }
+                    //         else {
+                    //             $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', luckyAvatar[0]);
+                    //         }
+                    //         if (profile.avatar) {
+                    //             $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
+                    //         }
+                    //         else {
+                    //             $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', luckyAvatar[1]);
+                    //         }
+                    //         let luckyBackground = randomItem(this.data.backgrounds);
+                    //         if (profile.background) {
+                    //             $(`.dh-template-${profile.template}`).css('background-image', `url(${profile.background})`);
+                    //         }
+                    //         else {
+                    //             $(`.dh-template-${profile.template}`).css('background-image', `url(${luckyBackground})`);
+                    //         }
+                    //         let markdownCensored = search.Replace(profile.markdown, '❤️');
+                    //         $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
+                    //         $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
+                    //         if (profile.cloudMusicId) {
+                    //             $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=32"></iframe>`);
+                    //             $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
+                    //         }
+                    //         if (profile.expiration) {
+                    //             profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('云端档案，网友定制，长期保存。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`云端档案，网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                    //         }
+                    //         else {
+                    //             $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案，即时生成。');
+                    //         }
+                    //         initTemplateResource(`${profile.template}`);
+                    //         let interval = setInterval(() => {
+                    //             $(`.dh-template-${profile.template} .dh-title`).hasClass('invisible') ? $(`.dh-template-${profile.template} .dh-title`).removeClass('invisible') : $(`.dh-template-${profile.template} .dh-title`).addClass('invisible');
+                    //         }, 1000);
+                    //         setTemplateResource(`${profile.template}`, 'blink', interval);
+                    //         $(`.dh-template-${profile.template}`).removeClass('hidden');
+                    //         console.log(`${profile.template} 模板初始化完成。`);
+                    //     },
+                    //     destroy: function (profile) {
+                    //         console.log(`${profile.template} 模板注销。`);
+                    //         // 也许应该确保先清空 interval 再操作元素，假如没清空 interval 还删除了元素，interval 内留了个引用，会有内存泄漏吧？
+                    //         // 当然也不是说现在一定就没有，我不是程序员，我啥也不懂
+                    //         let interval = getTemplateResource(`${profile.template}`, 'blink');
+                    //         clearInterval(interval);
+                    //         removeTemplateResource(`${profile.template}`, 'blink');
+                    //         $(`.dh-template-${profile.template} .dh-title-name`).text('');
+                    //         $(`.dh-template-${profile.template} .dh-daddy-name`).text('');
+                    //         $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', '');
+                    //         $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', '');
+                    //         $(`.dh-template-${profile.template} .dh-markdown`).html('');
+                    //         $(`.dh-template-${profile.template} .dh-music`).html('');
+                    //         $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
+                    //         $(`.dh-template-${profile.template} .dh-profile-info`).text('');
+                    //         $(`.dh-template-${profile.template}`).addClass('hidden');
+                    //         console.log(`${profile.template} 模板注销完成。`);
+                    //     }
+                    // }
                 ];
                 let currentProfile = {};
                 let onlineProfiles = [];

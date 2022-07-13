@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.1.5 | MIT License | https://tailwindcss.com
+! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -585,6 +585,10 @@ video {
   right: 0px;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .right-12 {
   right: 3rem;
 }
@@ -597,16 +601,16 @@ video {
   bottom: 0.5rem;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
 .z-50 {
   z-index: 50;
 }
 
 .z-10 {
   z-index: 10;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .-z-50 {
@@ -675,28 +679,24 @@ video {
   height: 100%;
 }
 
-.h-6 {
-  height: 1.5rem;
+.h-8 {
+  height: 2rem;
 }
 
 .h-10 {
   height: 2.5rem;
 }
 
-.h-8 {
-  height: 2rem;
-}
-
 .h-64 {
   height: 16rem;
 }
 
-.h-5\/6 {
-  height: 83.333333%;
-}
-
 .h-14 {
   height: 3.5rem;
+}
+
+.h-5\/6 {
+  height: 83.333333%;
 }
 
 .h-20 {
@@ -773,10 +773,10 @@ video {
   justify-content: space-between;
 }
 
-.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .overflow-hidden {
@@ -898,6 +898,16 @@ video {
   padding: 1.5rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -962,6 +972,11 @@ video {
   font-weight: 400;
 }
 
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -970,6 +985,11 @@ video {
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
 .text-gray-500 {
@@ -1012,6 +1032,10 @@ video {
 .hover\:text-gray-600:hover {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
 }
 
 @media (min-width: 768px) {
