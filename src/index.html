@@ -59,18 +59,61 @@
                 class="dh-operation-panel w-5/6 h-4/5 md:w-2/5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white">
                 <!-- 添加 z-10 以免被下方绝对定位元素覆盖 -->
                 <div
-                    class="dh-operation-panel-close absolute right-0 w-12 h-12 flex items-center justify-center z-10 text-3xl text-red-500">
+                    class="dh-operation-panel-close absolute right-0 w-12 h-12 flex items-center justify-center z-10 text-3xl text-red-500 hover:text-red-600">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
-                <div class="dh-operation-section-profile-switch hidden absolute inset-0 ">
+                <div class="dh-operation-section-profile-switch hidden absolute inset-0">
                     <div class="dh-profile-switch w-full h-full flex flex-col flex-nowrap p-6">
                         <div class="dh-profile-switch-title mb-6 text-2xl font-bold">切换档案</div>
                         <!-- 控件区域手动添加 block 类来使元素垂直排列，不使用 flex 因为 flex 在元素多的情况下会使元素 shrink -->
-                        <div class="dh-profile-switch-elements flex-grow overflow-y-auto overscroll-contain space-y-6">
+                        <div class="dh-profile-switch-elements flex-grow overflow-y-auto overscroll-contain space-y-4"
+                            autocomplete="off" autocomplete="off">
                             <select class="dh-profile-switch-selections block w-64 h-6">
                             </select>
                             <button
                                 class="dh-profile-switch-confirm block w-24 h-10 rounded text-white bg-green-500 hover:bg-green-600">确定</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="dh-operation-section-profile-edit hidden absolute inset-0">
+                    <div class="dh-profile-edit w-full h-full flex flex-col flex-nowrap p-6">
+                        <div class="dh-profile-edit-title mb-6 text-2xl font-bold">编辑档案</div>
+                        <!-- 控件区域手动添加 block 类来使元素垂直排列，不使用 flex 因为 flex 在元素多的情况下会使元素 shrink -->
+                        <div class="dh-profile-edit-elements flex-grow overflow-y-auto overscroll-contain space-y-4">
+                            <div class="dh-profile-edit-types-title text-md">操作</div>
+                            <select class="dh-profile-edit-types block w-64 h-8" autocomplete="off">
+                                <option value="create">新建一份云端档案</option>
+                                <option value="update">修改当前云端档案</option>
+                                <option value="delete">删除当前云端档案</option>
+                            </select>
+                            <div class="dh-profile-edit-name-title text-md">子女姓名*</div>
+                            <input class="dh-profile-edit-name block w-64 h-8 outline-none border-2 border-gray-500"
+                                type="text" autocomplete="off">
+                            <div class="dh-profile-edit-daddy-name-title text-md">父亲姓名*</div>
+                            <input
+                                class="dh-profile-edit-daddy-name block w-64 h-8 outline-none border-2 border-gray-500"
+                                type="text" autocomplete="off">
+                            <div class="dh-profile-edit-markdown-title text-md">文本（支持 Markdown）*</div>
+                            <textarea
+                                class="dh-profile-edit-markdown w-64 h-64 resize outline-none border-2 border-gray-500"
+                                autocomplete="off"></textarea>
+                            <div class="dh-profile-edit-background-title text-md">背景图片</div>
+                            <input
+                                class="dh-profile-edit-background block w-64 h-8 outline-none border-2 border-gray-500"
+                                type="text" autocomplete="off">
+                            <div class="dh-profile-edit-avatar-title text-md">子女头像</div>
+                            <input class="dh-profile-edit-avatar block w-64 h-8 outline-none border-2 border-gray-500"
+                                type="text" autocomplete="off">
+                            <div class="dh-profile-edit-daddy-avatar-title text-md">父亲头像</div>
+                            <input
+                                class="dh-profile-edit-daddy-avatar block w-64 h-8 outline-none border-2 border-gray-500"
+                                type="text" autocomplete="off">
+                            <div class="dh-profile-edit-cloud-music-id-title text-md">网易云音乐 Id</div>
+                            <input
+                                class="dh-profile-edit-cloud-music-id block w-64 h-8 outline-none border-2 border-gray-500"
+                                type="text" autocomplete="off">
+                            <button
+                                class="dh-profile-edit-confirm block w-24 h-10 rounded text-white bg-green-500 hover:bg-green-600">确定</button>
                         </div>
                     </div>
                 </div>
@@ -81,7 +124,8 @@
         <!-- 以 default 为准 -->
         <!-- break-all：需要模板内所有的长串英文也换行 -->
         <!-- 希望 default 模板占一屏，因此加 overflow-hidden 以防止内容溢出，一屏装不下 -->
-        <div class="dh-template-default hidden absolute inset-0 break-all overflow-hidden bg-blue-50">
+        <div
+            class="dh-template-default hidden absolute inset-0 break-all overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed bg-white">
             <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
             <!-- 使用 Tailwind CSS 设计时以小屏优先，大屏加断点 -->
             <div
@@ -113,12 +157,12 @@
                     <div class="dh-card-tail flex flex-nowrap justify-between">
                         <div class="dh-functions flex flex-nowrap">
                             <div
-                                class="dh-function-btn-switch-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-blue-500">
+                                class="dh-function-btn-switch-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-gray-600">
                                 <i class="fa-regular fa-address-card"></i>
                             </div>
                             <div
-                                class="dh-function-btn-add-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-blue-500">
-                                <i class="fa-regular fa-square-plus"></i>
+                                class="dh-function-btn-edit-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-gray-600">
+                                <i class="fa-solid fa-user-pen"></i>
                             </div>
                         </div>
                         <div class="dh-daddy text-right flex items-center justify-center text-xl font-bold">
@@ -128,7 +172,7 @@
                                 <div class="dh-daddy-name inline"></div>
                             </div>
                         </div>
-                        <div class="dh-profile-info hidden absolute right-4 bottom-2 text-right text-xs text-gray-500">
+                        <div class="dh-profile-info absolute right-4 bottom-2 text-right text-xs text-gray-500">
                         </div>
                     </div>
                 </div>
@@ -136,7 +180,8 @@
             <div class="dh-music hidden absolute bottom-0">
             </div>
         </div>
-        <div class="dh-template-test hidden absolute inset-0 break-all overflow-hidden bg-red-50">
+        <div
+            class="dh-template-test hidden absolute inset-0 break-all overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed bg-white">
             <!-- 最好是通过设置 margin 来调整各项间距，因为 Tailwind CSS 的 space 会影响绝对定位的元素 -->
             <!-- 使用 Tailwind CSS 设计时以小屏优先，大屏加断点 -->
             <div
@@ -146,7 +191,6 @@
                     <div class="dh-title-text inline">，我是你爹！</div>
                 </div>
                 <!-- card 的 overflow-hidden 不能省，省了就溢出，因为 card 无固定高度，markdown 也无固定高度 -->
-                <!-- padding 可能需要再调，头像有些挡下方字 -->
                 <div
                     class="dh-card flex-grow flex flex-col flex-nowrap px-6 py-6 overflow-hidden rounded-3xl border-2 border-stone-300 shadow-2xl bg-stone-50">
                     <!-- 又包了一层。hidden 和 flex 不能加在同一元素上，因为 Tailwind CSS 的 hidden 实际上是 display: none -->
@@ -169,12 +213,12 @@
                     <div class="dh-card-tail flex flex-nowrap justify-between">
                         <div class="dh-functions flex flex-nowrap">
                             <div
-                                class="dh-function-btn-switch-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-blue-500">
+                                class="dh-function-btn-switch-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-gray-600">
                                 <i class="fa-regular fa-address-card"></i>
                             </div>
                             <div
-                                class="dh-function-btn-add-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-blue-500">
-                                <i class="fa-regular fa-square-plus"></i>
+                                class="dh-function-btn-edit-profile w-12 h-12 mr-4 flex items-center justify-center text-3xl text-gray-500 hover:text-gray-600">
+                                <i class="fa-solid fa-user-pen"></i>
                             </div>
                         </div>
                         <div class="dh-daddy text-right flex items-center justify-center text-xl font-bold">
@@ -184,7 +228,7 @@
                                 <div class="dh-daddy-name inline"></div>
                             </div>
                         </div>
-                        <div class="dh-profile-info hidden absolute right-4 bottom-2 text-right text-xs text-gray-500">
+                        <div class="dh-profile-info absolute right-4 bottom-2 text-right text-xs text-gray-500">
                         </div>
                     </div>
                 </div>
@@ -267,23 +311,33 @@
                 //     switchProfile();
                 // });
                 let closeOperationScreen = () => {
+                    $('.dh-profile-edit-name').val('');
+                    $('.dh-profile-edit-daddy-name').val('');
+                    $('.dh-profile-edit-markdown').val('');
+                    $('.dh-profile-edit-background').val('');
+                    $('.dh-profile-edit-avatar').val('');
+                    $('.dh-profile-edit-daddy-avatar').val('');
+                    $('.dh-profile-edit-daddy-cloud-music-id').val('');
                     $('.dh-operation-section-profile-switch').addClass('hidden');
                     $('.dh-operation-screen').addClass('hidden');
                     $('.dh-top-screens').addClass('hidden');
-                }
+                };
+                // 操作面板关闭按钮点击事件
                 $('.dh-operation-panel-close').click(closeOperationScreen);
+                // 切换档案按钮点击事件
                 $('.dh-function-btn-switch-profile').click(() => {
                     $('.dh-profile-switch-selections option').remove();
                     for (let i = 0, length = onlineProfiles.length; i < length; i++) {
                         let p = onlineProfiles[i];
                         $('.dh-profile-switch-selections').append(`<option value='${p.id}'>${p.name}，${p.daddy}</option>`);
                     }
-                    $('.dh-profile-switch-selections').append(`<option value='local'>本地档案</option>`);
-                    currentProfile.id ? $('.dh-profile-switch-selections').val(currentProfile.id) : $('.dh-profile-switch-selections').val('local');
-                    $('.dh-top-screens').removeClass('hidden');
-                    $('.dh-operation-screen').removeClass('hidden');
+                    $('.dh-profile-switch-selections').append(`<option value="local">本地档案</option>`);
+                    currentProfile.id ? $('.dh-profile-switch-selections').val(currentProfile.id) : $('.dh-profile-switch-selections').val('local'); // 设置 value 为 id 或 'local' 的一项选中
                     $('.dh-operation-section-profile-switch').removeClass('hidden');
+                    $('.dh-operation-screen').removeClass('hidden');
+                    $('.dh-top-screens').removeClass('hidden');
                 });
+                // 切换档案确认事件
                 $('.dh-profile-switch-confirm').click(() => {
                     let targetProfileId = $('.dh-profile-switch-selections').val();
                     if (targetProfileId !== 'local') {
@@ -299,6 +353,81 @@
                     }
                     closeOperationScreen();
                 });
+                // 编辑档案按钮点击事件
+                $('.dh-function-btn-edit-profile').click(() => {
+                    // if (currentProfile.id) {
+                    //     $('.dh-profile-edit-types option[value="update"]').removeAttr('disabled', 'disabled');
+                    //     $('.dh-profile-edit-types option[value="delete"]').removeAttr('disabled', 'disabled');
+                    // }
+                    // else {
+                    //     $('.dh-profile-edit-types option[value="update"]').attr('disabled', 'disabled');
+                    //     $('.dh-profile-edit-types option[value="delete"]').attr('disabled', 'disabled');
+                    // }
+                    $('.dh-profile-edit-types').val('create'); // 设置 value 为 'create' 的一项选中
+                    $('.dh-operation-section-profile-edit').removeClass('hidden');
+                    $('.dh-operation-screen').removeClass('hidden');
+                    $('.dh-top-screens').removeClass('hidden');
+                });
+                // 编辑档案操作类型变更事件
+                $('.dh-profile-edit-types').change(() => {
+                    let value = $('.dh-profile-edit-types').val();
+                    if (value === 'delete') {
+                        $('.dh-profile-edit-name-title').addClass('hidden');
+                        $('.dh-profile-edit-daddy-name-title').addClass('hidden');
+                        $('.dh-profile-edit-markdown-title').addClass('hidden');
+                        $('.dh-profile-edit-background-title').addClass('hidden');
+                        $('.dh-profile-edit-avatar-title').addClass('hidden');
+                        $('.dh-profile-edit-daddy-avatar-title').addClass('hidden');
+                        $('.dh-profile-edit-cloud-music-id-title').addClass('hidden');
+                        $('.dh-profile-edit-name').addClass('hidden');
+                        $('.dh-profile-edit-daddy-name').addClass('hidden');
+                        $('.dh-profile-edit-markdown').addClass('hidden');
+                        $('.dh-profile-edit-background').addClass('hidden');
+                        $('.dh-profile-edit-avatar').addClass('hidden');
+                        $('.dh-profile-edit-daddy-avatar').addClass('hidden');
+                        $('.dh-profile-edit-cloud-music-id').addClass('hidden');
+                    }
+                    else {
+                        if (value === 'update') {
+                            $('.dh-profile-edit-name').val(currentProfile.name);
+                            $('.dh-profile-edit-daddy-name').val(currentProfile.daddy);
+                            $('.dh-profile-edit-markdown').val(currentProfile.markdown);
+                            $('.dh-profile-edit-background').val(currentProfile.background);
+                            $('.dh-profile-edit-avatar').val(currentProfile.avatar);
+                            $('.dh-profile-edit-daddy-avatar').val(currentProfile.daddyAvatar);
+                            $('.dh-profile-edit-cloud-music-id').val(currentProfile.cloudMusicId);
+                        } else {
+                            $('.dh-profile-edit-name').val('');
+                            $('.dh-profile-edit-daddy-name').val('');
+                            $('.dh-profile-edit-markdown').val('');
+                            $('.dh-profile-edit-background').val('');
+                            $('.dh-profile-edit-avatar').val('');
+                            $('.dh-profile-edit-daddy-avatar').val('');
+                            $('.dh-profile-edit-daddy-cloud-music-id').val('');
+                        }
+                        $('.dh-profile-edit-name-title').removeClass('hidden');
+                        $('.dh-profile-edit-daddy-name-title').removeClass('hidden');
+                        $('.dh-profile-edit-markdown-title').removeClass('hidden');
+                        $('.dh-profile-edit-background-title').removeClass('hidden');
+                        $('.dh-profile-edit-avatar-title').removeClass('hidden');
+                        $('.dh-profile-edit-daddy-avatar-title').removeClass('hidden');
+                        $('.dh-profile-edit-cloud-music-id-title').removeClass('hidden');
+                        $('.dh-profile-edit-name').removeClass('hidden');
+                        $('.dh-profile-edit-daddy-name').removeClass('hidden');
+                        $('.dh-profile-edit-markdown').removeClass('hidden');
+                        $('.dh-profile-edit-background').removeClass('hidden');
+                        $('.dh-profile-edit-avatar').removeClass('hidden');
+                        $('.dh-profile-edit-daddy-avatar').removeClass('hidden');
+                        $('.dh-profile-edit-cloud-music-id').removeClass('hidden');
+                    }
+                });
+                // 切换档案确认事件
+                // ……
+
+
+
+
+
                 // 先随机生成一套数据，然后发送请求，查无此人或出错都使用随机数据
                 // 如果没出错，就选择第一个结果（如果有 hash，选择 hash 对应），设置 hash，提供切换功能，也可切换到随机数据
                 let randomItem = (array) => {
@@ -311,6 +440,7 @@
                         }
                     }
                 };
+                // 模板资源相关函数
                 let initTemplateResource = (name) => {
                     templateResources[`template-${name}-resource`] = {};
                 };
@@ -324,12 +454,15 @@
                     delete templateResources[`template-${name}-resource`].resourceName;
                 };
                 let switchProfile = (profile) => {
+                    let markdowns = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+                    let daddyNames = ['利维亚的杰洛特', '达斯·维达', '布克·德怀特', '伊莱·万斯', '奎托斯', '丁·贾伦', '克利福德·昂格尔'];
                     // 注意，这里 profile 里的 template 为与后端同一，都只是模板名称，需要获取模板对象使用 getTemplate
                     let luckyTemplate = randomItem(templates);
-                    let luckyMarkdown = randomItem(luckyTemplate.data.markdowns);
+                    let luckyMarkdown = randomItem(markdowns);
+                    let luckyDaddy = randomItem(daddyNames);
                     let localProfile = {
                         name: nameStr,
-                        daddy: luckyTemplate.data.daddyName,
+                        daddy: luckyDaddy,
                         markdown: luckyMarkdown,
                         template: luckyTemplate.name
                     };
@@ -411,10 +544,8 @@
                     {
                         name: 'default',
                         data: {
-                            markdowns: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-                            daddyName: '某神秘男子',
-                            avatar: './imgs/template-default/son.webp', // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
-                            daddyAvatar: './imgs/template-default/daddy.webp'
+                            avatars: [['./imgs/template-default/daddy-1.webp', './imgs/template-default/son-1.webp'], ['./imgs/template-default/daddy-2.png', './imgs/template-default/son-2.jpg']], // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
+                            backgrounds: ['./imgs/template-default/bg-1.jpg', './imgs/template-default/bg-2.jpg']
                         },
                         initialize: function (profile) {
                             // 用匿名函数的话，this 就指向 window 而不是模板对象了
@@ -422,10 +553,26 @@
                             $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
                             let daddyCensored = search.Replace(profile.daddy, '❤️');
                             $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
-                            profile.avatar = profile.avatar || this.data.avatar;
-                            profile.daddyAvatar = profile.daddyAvatar || this.data.daddyAvatar;
-                            $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
-                            $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                            let luckyAvatar = randomItem(this.data.avatars);
+                            if (profile.daddyAvatar) {
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', luckyAvatar[0]);
+                            }
+                            if (profile.avatar) {
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', luckyAvatar[1]);
+                            }
+                            let luckyBackground = randomItem(this.data.backgrounds);
+                            if (profile.background) {
+                                $(`.dh-template-${profile.template}`).css('background-image', `url(${profile.background})`);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template}`).css('background-image', `url(${luckyBackground})`);
+                            }
                             let markdownCensored = search.Replace(profile.markdown, '❤️');
                             $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
                             $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
@@ -434,8 +581,10 @@
                                 $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
                             }
                             if (profile.expiration) {
-                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保留。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
-                                $(`.dh-template-${profile.template} .dh-profile-info`).removeClass('hidden');
+                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保存。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案，即时生成。');
                             }
                             $(`.dh-template-${profile.template}`).removeClass('hidden');
                             console.log(`${profile.template} 模板初始化完成。`);
@@ -450,7 +599,6 @@
                             $(`.dh-template-${profile.template} .dh-music`).html('');
                             $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
                             $(`.dh-template-${profile.template} .dh-profile-info`).text('');
-                            $(`.dh-template-${profile.template} .dh-profile-info`).addClass('hidden');
                             $(`.dh-template-${profile.template}`).addClass('hidden');
                             console.log(`${profile.template} 模板注销完成。`);
                         }
@@ -458,21 +606,34 @@
                     {
                         name: 'test',
                         data: {
-                            markdowns: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'],
-                            daddyName: '乔治·RR·马丁',
-                            avatar: './imgs/template-default/son.webp', // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
-                            daddyAvatar: './imgs/template-default/daddy.webp'
+                            avatars: [['./imgs/template-default/daddy-1.webp', './imgs/template-default/son-1.webp'], ['./imgs/template-default/daddy-2.png', './imgs/template-default/son-2.jpg']], // default 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
+                            backgrounds: ['./imgs/template-default/bg-1.jpg', './imgs/template-default/bg-2.jpg']
                         },
                         initialize: function (profile) {
-                            // 用匿名函数的话，this 就指向 window 而不是模板对象了
                             console.log(`${profile.template} 模板初始化。`);
                             $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
                             let daddyCensored = search.Replace(profile.daddy, '❤️');
                             $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
-                            profile.avatar = profile.avatar || this.data.avatar;
-                            profile.daddyAvatar = profile.daddyAvatar || this.data.daddyAvatar;
-                            $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
-                            $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                            let luckyAvatar = randomItem(this.data.avatars);
+                            if (profile.daddyAvatar) {
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', profile.daddyAvatar);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template} .dh-daddy-avatar-img`).attr('src', luckyAvatar[0]);
+                            }
+                            if (profile.avatar) {
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', profile.avatar);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', luckyAvatar[1]);
+                            }
+                            let luckyBackground = randomItem(this.data.backgrounds);
+                            if (profile.background) {
+                                $(`.dh-template-${profile.template}`).css('background-image', `url(${profile.background})`);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template}`).css('background-image', `url(${luckyBackground})`);
+                            }
                             let markdownCensored = search.Replace(profile.markdown, '❤️');
                             $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
                             $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
@@ -481,8 +642,10 @@
                                 $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
                             }
                             if (profile.expiration) {
-                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保留。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
-                                $(`.dh-template-${profile.template} .dh-profile-info`).removeClass('hidden');
+                                profile.reserved ? $(`.dh-template-${profile.template} .dh-profile-info`).text('网友定制，长期保存。') : $(`.dh-template-${profile.template} .dh-profile-info`).text(`网友定制，将于 ${profile.expiration.split('T')[0]} 过期。`);
+                            }
+                            else {
+                                $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案，即时生成。');
                             }
                             initTemplateResource(`${profile.template}`);
                             let interval = setInterval(() => {
@@ -507,7 +670,6 @@
                             $(`.dh-template-${profile.template} .dh-music`).html('');
                             $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
                             $(`.dh-template-${profile.template} .dh-profile-info`).text('');
-                            $(`.dh-template-${profile.template} .dh-profile-info`).addClass('hidden');
                             $(`.dh-template-${profile.template}`).addClass('hidden');
                             console.log(`${profile.template} 模板注销完成。`);
                         }
