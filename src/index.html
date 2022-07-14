@@ -297,10 +297,15 @@
         // let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
         // let hostSplited = hostTmp.split('.');
         let hostSplited = punycode.ToUnicode(window.location.host).split('.');
-        if (hostSplited[0] === 'www' || hostSplited[0] === '姓名') {
-            window.location.href = 'https://大儿砸.我是你爹.com';
+        // if (hostSplited[0] === '姓名') {
+        //     window.location.href = 'https://大儿砸.我是你爹.com';
+        // }
+        // if (hostSplited.length !== 3 || hostSplited[0] === 'www') {
+        if (hostSplited.length !== 3) {
+            $('.dh-loading-screen').addClass('hidden');
+            $('.dh-hint-screen').removeClass('hidden');
         }
-        if (hostSplited.length === 3) {
+        else {
             const NAME_LENGTH = 16;
             const DADDY_NAME_LENGTH = 16;
             const MARKDOWN_LENGTH = 1000;
@@ -863,9 +868,6 @@
                 $('.dh-loading-screen').addClass('hidden');
                 $('.dh-name-change-screen').removeClass('hidden');
             }
-        } else {
-            $('.dh-loading-screen').addClass('hidden');
-            $('.dh-hint-screen').removeClass('hidden');
         }
     </script>
 </body>
