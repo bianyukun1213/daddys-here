@@ -101,6 +101,15 @@
                                 <input
                                     class="dh-profile-edit-name block w-64 h-8 px-2 outline-none border-2 border-gray-500"
                                     type="text" autocomplete="off">
+                                <div class="dh-profile-edit-gender-title w-64 text-md">子女性别</div>
+                                <!-- select 加 px-1 bg-white -->
+                                <select
+                                    class="dh-profile-edit-gender block w-64 h-8 px-1 bg-white outline-none border-2 border-gray-500"
+                                    autocomplete="off">
+                                    <option value="0">不选择</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
                                 <div class="dh-profile-edit-daddy-name-title w-64 text-md">父亲姓名*</div>
                                 <input
                                     class="dh-profile-edit-daddy-name block w-64 h-8 px-2 outline-none border-2 border-gray-500"
@@ -341,12 +350,14 @@
                 }
                 function closeOperationScreen() {
                     $('.dh-profile-edit-name').val('');
+                    $('.dh-profile-edit-gender').val('0'); // 设置 value 为 '0' 的一项选中
                     $('.dh-profile-edit-daddy-name').val('');
-                    $('.dh-profile-edit-markdown').val('');
+                    $('.dh-profile-edit-markdown').val(MARKDOWN_DEMO); // 提供 Markdown 示例
+                    $('.dh-profile-edit-template').val(currentProfile.template);
                     $('.dh-profile-edit-background').val('');
                     $('.dh-profile-edit-avatar').val('');
                     $('.dh-profile-edit-daddy-avatar').val('');
-                    $('.dh-profile-edit-daddy-cloud-music-id').val('');
+                    $('.dh-profile-edit-cloud-music-id').val('');
                     $('.dh-operation-section-profile-edit').addClass('hidden');
                     $('.dh-operation-section-profile-switch').addClass('hidden');
                     $('.dh-operation-screen').addClass('hidden');
@@ -395,12 +406,13 @@
                         $('.dh-profile-edit-types option[value="update"]').attr('disabled', 'disabled');
                         $('.dh-profile-edit-types option[value="delete"]').attr('disabled', 'disabled');
                     }
+                    $('.dh-profile-edit-types').val('create'); // 设置 value 为 'create' 的一项选中
                     $('.dh-profile-edit-template option').remove();
                     for (let i = 0, length = templates.length; i < length; i++) {
                         $('.dh-profile-edit-template').append(`<option value="${templates[i].name}">${templates[i].humanName}${templates[i].name === currentProfile.template ? '（当前）' : ''}</option>`);
                     }
                     $('.dh-profile-edit-template').val(currentProfile.template);
-                    $('.dh-profile-edit-types').val('create'); // 设置 value 为 'create' 的一项选中
+                    $('.dh-profile-edit-gender').val('0'); // 设置 value 为 '0' 的一项选中
                     $('.dh-profile-edit-markdown').val(MARKDOWN_DEMO); // 提供 Markdown 示例
                     $('.dh-operation-section-profile-edit').removeClass('hidden');
                     $('.dh-operation-screen').removeClass('hidden');
@@ -417,6 +429,7 @@
                     else {
                         if (value === 'update') {
                             $('.dh-profile-edit-name').val(currentProfile.name);
+                            $('.dh-profile-edit-gender').val(currentProfile.gender);
                             $('.dh-profile-edit-daddy-name').val(currentProfile.daddy);
                             $('.dh-profile-edit-markdown').val(currentProfile.markdown);
                             $('.dh-profile-edit-template').val(currentProfile.template);
@@ -426,13 +439,14 @@
                             $('.dh-profile-edit-cloud-music-id').val(currentProfile.cloudMusicId);
                         } else {
                             $('.dh-profile-edit-name').val('');
+                            $('.dh-profile-edit-gender').val('0'); // 设置 value 为 '0' 的一项选中
                             $('.dh-profile-edit-daddy-name').val('');
                             $('.dh-profile-edit-markdown').val(MARKDOWN_DEMO); // 提供 Markdown 示例
                             $('.dh-profile-edit-template').val(currentProfile.template);
                             $('.dh-profile-edit-background').val('');
                             $('.dh-profile-edit-avatar').val('');
                             $('.dh-profile-edit-daddy-avatar').val('');
-                            $('.dh-profile-edit-daddy-cloud-music-id').val('');
+                            $('.dh-profile-edit-cloud-music-id').val('');
                         }
                         $('.dh-profile-edit-data').removeClass('hidden');
                     }
@@ -441,6 +455,7 @@
                 $('.dh-profile-edit-confirm').click(() => {
                     if (confirm('此操作无法撤回，数据无法恢复到之前的状态，是否继续？')) {
                         let name = $('.dh-profile-edit-name').val();
+                        let gender = parseInt($('.dh-profile-edit-gender').val(), 10);
                         let daddyName = $('.dh-profile-edit-daddy-name').val();
                         let markdown = $('.dh-profile-edit-markdown').val();
                         let template = $('.dh-profile-edit-template').val();
@@ -460,6 +475,7 @@
                                 entry: '/create',
                                 data: JSON.stringify({
                                     name: name,
+                                    gender: gender,
                                     daddy: daddyName,
                                     markdown: markdown,
                                     template: template,
@@ -493,6 +509,7 @@
                                 entry: `/update-by-id/${currentProfile.id}`,
                                 data: JSON.stringify({
                                     name: name,
+                                    gender: gender,
                                     daddy: daddyName,
                                     markdown: markdown,
                                     template: template,
