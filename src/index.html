@@ -42,7 +42,7 @@
                 </div>
                 <div class="hd-hint-text text-3xl">
                     <a class="dh-hint-link underline" href="https://大儿砸.我是你爹.com">
-                        名字.我是你爹.com
+                        姓名.我是你爹.com
                     </a>
                 </div>
 
@@ -297,7 +297,7 @@
         // let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
         // let hostSplited = hostTmp.split('.');
         let hostSplited = punycode.ToUnicode(window.location.host).split('.');
-        if (hostSplited[0] === 'www') {
+        if (hostSplited[0] === 'www' || hostSplited[0] === '姓名') {
             window.location.href = 'https://大儿砸.我是你爹.com';
         }
         if (hostSplited.length === 3) {
