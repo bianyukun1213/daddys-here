@@ -712,8 +712,11 @@
                                 }
                             }
                             else {
-                                $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案，即时生成');
+                                $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案');
                             }
+                            profileInfo.click(() => {
+                                alert('本地档案：使用 JavaScript 代码在浏览器中即时生成，不会保存\n云端档案：由云端返回，在云端保存\n姓名唯一：无法创建同名档案或修改某档案使其与之同名\n受保护：无法修改或删除，不会被自动删除\n长期保存：不会被自动删除\n将于某日过期：在某日自动删除');
+                            });
                             $(`.dh-template-${profile.template}`).removeClass('hidden');
                             console.log(`${profile.template} 模板初始化完成。`);
                         },
@@ -727,6 +730,7 @@
                             $(`.dh-template-${profile.template} .dh-music`).html('');
                             $(`.dh-template-${profile.template} .dh-music`).addClass('hidden');
                             $(`.dh-template-${profile.template} .dh-profile-info`).text('');
+                            $(`.dh-template-${profile.template} .dh-profile-info`).unbind('click');
                             $(`.dh-template-${profile.template}`).addClass('hidden');
                             console.log(`${profile.template} 模板注销完成。`);
                         }
