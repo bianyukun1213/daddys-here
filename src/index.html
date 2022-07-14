@@ -294,9 +294,12 @@
         $('.dh-about-btn').click(() => {
             alert('仅为玩笑，切莫当真。\n如果您觉得权力、名誉等受到侵犯，或发现了不适宜甚至违法的内容，通常可以直接删除。如果档案受保护或在本地生成无法删除，请联系 bianyukun1213@outlook.com。十分抱歉，并感谢您的反馈！');
         });
-        let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
-        let hostSplited = hostTmp.split('.');
-        // let hostSplited = punycode.ToUnicode(window.location.host).split['.'];
+        // let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
+        // let hostSplited = hostTmp.split('.');
+        let hostSplited = punycode.ToUnicode(window.location.host).split('.');
+        if (hostSplited[0] === 'www') {
+            window.location.href = 'https://大儿砸.我是你爹.com';
+        }
         if (hostSplited.length === 3) {
             const NAME_LENGTH = 16;
             const DADDY_NAME_LENGTH = 16;
