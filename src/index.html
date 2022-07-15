@@ -922,16 +922,16 @@
                                     });
                                 }
                                 else {
-                                    if (profile.reserved) {
-                                        profileInfo.text((index, oldContent) => {
-                                            return oldContent + ' / 长期保存';
-                                        });
-                                    }
-                                    else {
-                                        profileInfo.text((index, oldContent) => {
-                                            return oldContent + ` / 将于 ${profile.expiration.split('T')[0]} 过期`;
-                                        });
-                                    }
+                                    // if (profile.reserved) {
+                                    //     profileInfo.text((index, oldContent) => {
+                                    //         return oldContent + ' / 长期保存';
+                                    //     });
+                                    // }
+                                    // else {
+                                    profileInfo.text((index, oldContent) => {
+                                        return oldContent + ` / 将于 ${profile.expiration.split('T')[0]} 过期`;
+                                    });
+                                    // }
                                 }
                             }
                             else {
