@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords"
+        content="姓名.我是你爹.com,我是你爹.com,我是你爹,爹,爸爸,父亲,儿子,好大儿,大儿子,儿子,好闺女,大闺女,闺女,哥们,哥们儿,兄弟,室友,同学,整人,整蛊,整活,恶搞,笑话">
+    <meta name="description" content="姓名.我是你爹.com，无负担当爹，让你体验一分钟当爹，当一分钟爹的乐趣。">
     <title>我是你爹！</title>
     <link rel="shortcut icon" href="./imgs/common/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/index.css">
@@ -20,6 +23,8 @@
 <body>
     <!-- 需要动态设置的类，先在这里添加以让 Tailwind CSS 编译，这种方法不知道行不行，我看有的样式会用变量 -->
     <div class="dh-tailwind-css-classes-init hidden">
+        <!-- 一级标题保留 -->
+        <h1>我是你爹.com</h1>
         <!-- forerunner 模板在动态调整 Markdown 图片时用到的样式，其中 lg:max-w-3/5 在配置文件中定制，并且已经试验过了，断点也是要编译的 -->
         <!-- text-blue-500 hover:text-blue-600 是 Markdown 解析的链接的颜色 -->
         <!-- disabled:opacity-50 是正在提交数据时用在按钮上的 -->
@@ -28,6 +33,7 @@
         </div>
         <div class="dh-template-test-styles invisible"></div>
     </div>
+    <!-- #region 顶层屏幕 -->
     <div class="dh-top-screens absolute inset-0 z-50">
         <div class="dh-loading-screen absolute inset-0 bg-yellow-500">
             <div
@@ -58,6 +64,7 @@
                 </div>
             </div>
         </div>
+        <!-- #region 操作屏幕 -->
         <div class="dh-operation-screen hidden absolute inset-0 bg-black bg-opacity-50">
             <!-- 需要 overflow-hidden -->
             <div
@@ -67,6 +74,7 @@
                     class="dh-operation-panel-close absolute right-0 w-12 h-12 flex items-center justify-center z-10 text-3xl text-red-500 hover:text-red-600 disabled:opacity-50">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
+                <!-- #region “切换档案”节 -->
                 <div class="dh-operation-section-profile-switch hidden absolute inset-0">
                     <div class="dh-profile-switch w-full h-full flex flex-col flex-nowrap p-6">
                         <div class="dh-profile-switch-title mb-6 text-2xl font-bold">切换档案</div>
@@ -82,6 +90,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- #endregion -->
+                <!-- #region “编辑档案”节 -->
                 <div class="dh-operation-section-profile-edit hidden absolute inset-0">
                     <div class="dh-profile-edit w-full h-full flex flex-col flex-nowrap p-6">
                         <div class="dh-profile-edit-title mb-6 text-2xl font-bold">编辑档案</div>
@@ -148,10 +158,14 @@
                         </div>
                     </div>
                 </div>
+                <!-- #endregion -->
             </div>
         </div>
+        <!-- #endregion -->
     </div>
+    <!-- #endregion -->
     <div class="dh-root absolute inset-0">
+        <!-- #region “先行者”模板 -->
         <div
             class="dh-about-btn cursor-pointer absolute right-0 bottom-0 w-14 h-14 z-40 flex items-center justify-center text-3xl text-red-500 hover:text-red-600">
             <i class="fa-solid fa-circle-info"></i>
@@ -216,6 +230,8 @@
             <div class="dh-music hidden absolute bottom-0">
             </div>
         </div>
+        <!-- #endregion -->
+        <!-- #region “测试”模板 -->
         <!-- <div
             class="dh-template-test hidden absolute inset-0 break-all overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed bg-white">
             <div
@@ -264,86 +280,264 @@
                 </div>
             </div>
             <div class="dh-music hidden absolute bottom-0">
-            </div> -->
-    </div>
-    <!-- 不加 overflow-hidden 的话，浏览器过窄，文字换行溢出露馅 -->
-    <div class="dh-pale absolute inset-0 -z-50 overflow-hidden">
-        空白 - 顷刻间，你被抽离原来的维度，马丁内斯的旧影仍在脑际徘徊，但在这里，占据你的是*毫无意义*的空白。
-        <br>
-        <br>
-        你 - “朵拉？”
-        <br>
-        <br>
-        空白 - ……
-        <br>
-        <br>
-        五感发达（视觉） [炼狱：失败] - 除了空白，你什么也看不到。
-        <br>
-        <br>
-        五感发达（听觉） [炼狱：失败] - 除了空白，你什么也听不到。
-        <br>
-        <br>
-        五感发达（嗅觉） [炼狱：失败] - 除了空白，你什么也闻不到。
-        <br>
-        <br>
-        平心定气 [极易：成功] - 除了空白，你什么也*感觉*不到。
-        <br>
-        <br>
-        博学多闻 [中等：成功] - 无色、无味、无特征且坚不可摧、永垂不朽。显然，这是一片*灰域*。
-        <br>
-        <br>
-        见微知著 [中等：成功] - 在久远的过去，开发者泼洒出这片灰域，也许是用于调试，也许是为了一点点乐趣。
-        <br>
-        <br>
-        解锁成就：灰域行者
-    </div>
+            </div>
+        </div> -->
+        <!-- #endregion -->
+        <!-- #region 调试用背景 -->
+        <!-- 不加 overflow-hidden 的话，浏览器过窄，文字换行溢出露馅 -->
+        <div class="dh-pale absolute inset-0 -z-50 overflow-hidden">
+            空白 - 顷刻间，你被抽离原来的维度，马丁内斯的旧影仍在脑际徘徊，但在这里，占据你的是*毫无意义*的空白。
+            <br>
+            <br>
+            你 - “朵拉？”
+            <br>
+            <br>
+            空白 - ……
+            <br>
+            <br>
+            五感发达（视觉） [炼狱：失败] - 除了空白，你什么也看不到。
+            <br>
+            <br>
+            五感发达（听觉） [炼狱：失败] - 除了空白，你什么也听不到。
+            <br>
+            <br>
+            五感发达（嗅觉） [炼狱：失败] - 除了空白，你什么也闻不到。
+            <br>
+            <br>
+            平心定气 [极易：成功] - 除了空白，你什么也*感觉*不到。
+            <br>
+            <br>
+            博学多闻 [中等：成功] - 无色、无味、无特征且坚不可摧、永垂不朽。显然，这是一片*灰域*。
+            <br>
+            <br>
+            见微知著 [中等：成功] - 在久远的过去，开发者泼洒出这片灰域，也许是用于调试，也许是为了一点点乐趣。
+            <br>
+            <br>
+            解锁成就：灰域行者
+        </div>
+        <!-- #endregion -->
     </div>
     <script>
         console.log('瞅什么瞅，我是你爹！');
         $('.dh-about-btn').click(() => {
             alert('仅为玩笑，切莫当真。\n如果您觉得权力、名誉等受到侵犯，或发现了不适宜甚至违法的内容，通常可以直接删除。如果档案受保护或在本地生成无法删除，请联系 bianyukun1213@outlook.com。十分抱歉，并感谢您的反馈！');
         });
-        // let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
-        // let hostSplited = hostTmp.split('.');
-        let hostSplited = punycode.ToUnicode(window.location.host).split('.');
-        // if (hostSplited[0] === '姓名') {
-        //     window.location.href = 'https://大儿砸.我是你爹.com';
-        // }
-        // if (hostSplited.length !== 3 || hostSplited[0] === 'www') {
+        let hostTmp = punycode.ToUnicode('xn--v4qp6qz71a.xn--6qq986bm4cjwp.com'); // 大儿砸.我是你爹.com
+        let hostSplited = hostTmp.split('.');
+        // let hostSplited = punycode.ToUnicode(window.location.host).split('.');
         if (hostSplited.length !== 3) {
             // $('.dh-loading-screen').addClass('hidden');
             // $('.dh-hint-screen').removeClass('hidden');
             window.location.href = 'https://大儿砸.我是你爹.com';
         }
         else {
+            // #region 各种常量
             const NAME_LENGTH = 16;
             const DADDY_NAME_LENGTH = 16;
             const MARKDOWN_LENGTH = 1000;
-            const MARKDOWN_DEMO = '在这里你可以写普通的文本，也可以写 Markdown 格式的文本。\n\n我这就教你怎么写。\n\n请记住，段落之间留有一行，就像这样。\n\n# 井号和空格打头表示一级标题\n\n## 两个井号就是二级标题\n\n### 以此类推……\n\n星号包裹文字，使之变成*斜体字*。\n\n两边各包两个星号，那么它就是**粗体字**。\n\n要使用~~删除线~~，两边各包两个波浪号。\n\n- 减号和空格打头表示这是一个无序列表，各项之间无需再留一行\n- 你试试\n\n1. 数字、点和空格打头，就成了有序列表\n2. 这是第二项\n\n还可以放图片：\n\n![这里写替换文本，在图片加载失败时显示，盲人的读屏器也会读我，小括号内写图片 Url](https://s1.ax1x.com/2022/07/12/jgGz1s.png)\n\n还有更多用法，可以看 [这个教程](https://www.runoob.com/markdown/md-tutorial.html)。这里碍于篇幅就不一一介绍了。对了，链接的格式和图片很像，只不过没有前面的叹号。\n';
+            const MARKDOWN_DEMO = '在这里你可以写普通的文本，也可以写 Markdown 格式的文本。\n\n我这就教你怎么写。\n\n请记住，段落之间留有一行，就像这样。\n\n# 井号和空格打头表示一级标题\n\n## 两个井号就是二级标题\n\n### 以此类推……\n\n但提交时请**不要**包含一级标题，因为一个网页应该只有一个一级标题，而这个一级标题我保留了。\n\n星号包裹文字，使之变成*斜体字*。\n\n两边各包两个星号，那么它就是**粗体字**。\n\n要使用~~删除线~~，两边各包两个波浪号。\n\n- 减号和空格打头表示这是一个无序列表，各项之间无需再留一行\n- 你试试\n\n1. 数字、点和空格打头，就成了有序列表\n2. 这是第二项\n\n还可以放图片：\n\n![这里写替换文本；图片 Url 写在小括号内](https://s1.ax1x.com/2022/07/12/jgGz1s.png)\n\n还有更多用法，可以看 [这个教程](https://www.runoob.com/markdown/md-tutorial.html)。这里碍于篇幅就不一一介绍了。对了，链接的格式和图片很像，只不过没有前面的叹号。\n';
             const CLOUD_MUSIC_ID_LENGTH = 24;
             const nameStr = hostSplited[0];
-            let bannedWords = ['毛泽东', '周恩来', '刘少奇', '朱德', '彭德怀', '林彪', '刘伯承', '陈毅', '贺龙', '聂荣臻', '徐向前', '罗荣桓', '叶剑英', '李大钊', '陈独秀', '孙中山', '孙文', '孙逸仙', '邓小平', '陈云', '江泽民', '李鹏', '朱镕基', '李瑞环', '尉健行', '李岚清', '胡锦涛', '罗干', '温家宝', '吴邦国', '曾庆红', '贾庆林', '黄菊', '吴官正', '李长春', '吴仪', '回良玉', '曾培炎', '曹刚川', '唐家璇', '华建敏', '陈至立', '张德江', '俞正声', '王乐泉', '刘云山', '王刚', '王兆国', '刘淇', '贺国强', '郭伯雄', '胡耀邦', '王乐泉', '王兆国', '习近平', '李克强', '张高丽', '刘延东', '彭丽媛', '王岐山', '华国锋', '胡耀邦', '习大大', '吴帮国', '无帮国', '无邦国', '无帮过', '瘟家宝', '假庆林', '甲庆林', '假青林', '离长春', '习远平', '袭近平', '李磕墙', '贺过墙', '和锅枪', '胡主席', '习主席', '毛主席'];
-            let bannedWordsTr = ['毛澤東', '周恩來', '劉少奇', '朱德', '彭德懷', '林彪', '劉伯承', '陳毅', '賀龍', '聶榮臻', '徐向前', '羅榮桓', '葉劍英', '李大釗', '陳獨秀', '孫中山', '孫文', '孫逸仙', '鄧小平', '陳雲', '江澤民', '李鵬', '朱镕基', '李瑞環', '尉健行', '李嵐清', '胡錦濤', '羅幹', '溫家寶', '吳邦國', '曾慶紅', '賈慶林', '黃菊', '吳官正', '李長春', '吳儀', '回良玉', '曾培炎', '曹剛川', '唐家璇', '華建敏', '陳至立', '張德江', '俞正聲', '王樂泉', '劉雲山', '王剛', '王兆國', '劉淇', '賀國強', '郭伯雄', '胡耀邦', '王樂泉', '王兆國', '習近平', '李克強', '張高麗', '劉延東', '彭麗媛', '王岐山', '華國鋒', '胡耀邦', '習大大', '吳幫國', '無幫國', '無邦國', '無幫過', '瘟家寶', '假慶林', '甲慶林', '假青林', '離長春', '習遠平', '襲近平', '李磕墻', '賀過墻', '和鍋槍', '胡主席', '習主席', '毛主席'];
+            const markdowns = [
+                '都多大了，啥前儿能找个对象啊？\n\n从你爹这里遗传了这么优良的基因、这么迷人的长相，怎么可能没人追呢？\n\n……\n\n（啊？有对象啊？啥前儿搞的？咋不告诉爹呢？）',
+                '没想到都这么大了，差点儿就认不出来了。\n\n是老爹亏欠了你和你妈啊，当年抛下你娘俩儿去闯荡江湖，好在最终神功练成了！\n\n老爹这就把神功传授给你，就当是对你的补偿了。\n\n《葵花宝典》看到没，都绝版了，这是老爹当年省吃俭用买的二手盗版，现在可是连盗版都找不着了！\n\n……\n\n“**欲练此功，必先自宫**。”\n\n……\n\n欸，我刀呢？拿回来，听话。一会儿就完事儿了，不疼，你老爹也是这么过来的。',
+                '……\n\n这啥？\n\n娃儿？我啥时候有娃儿了？\n\n……\n\n噢噢噢，想起来了，大前年办宽带送的，一直没用，都落灰了。也用不上，卖了吧。\n\n……\n\n“小孩儿 是公是母不知道 就开了封，没用过 便宜出 可小刀 **仅限同城交易**”',
+                '你瞅瞅你，一天天扬了二正、吊儿郎当儿的，能有点儿出息不？\n\n你要明白，爸爸的公司将来是要交给你运营的，你现在这副样子，让我怎么放心？你这个能力，世界五百强的公司，你驾驭得住？\n\n我跟你说，好好学习吧！良药苦口利于病，忠言逆耳利于行，我这都是**为你好**，你也别嫌我磨叽。对你严格是让你将来有个好的出路，到时候你会感激的。虎父无犬子吗不是？**别让你老爹失望**。',
+                '这是哈阿\n\n网站 是什厶.\n\n大儿孑,大闰女教丿教老爹乍用、整不明曰阿|'
+            ];
+            const daddyNames = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '高龄猛♂男'];
+            // #endregion
+            // #region 各种敏感姓名
+            let bannedWords = [
+                "%u6BDB%u6CFD%u4E1C",
+                "%u5468%u6069%u6765",
+                "%u5218%u5C11%u5947",
+                "%u6731%u5FB7",
+                "%u5F6D%u5FB7%u6000",
+                "%u6797%u5F6A",
+                "%u5218%u4F2F%u627F",
+                "%u9648%u6BC5",
+                "%u8D3A%u9F99",
+                "%u8042%u8363%u81FB",
+                "%u5F90%u5411%u524D",
+                "%u7F57%u8363%u6853",
+                "%u53F6%u5251%u82F1",
+                "%u674E%u5927%u948A",
+                "%u9648%u72EC%u79C0",
+                "%u5B59%u4E2D%u5C71",
+                "%u5B59%u6587",
+                "%u5B59%u9038%u4ED9",
+                "%u9093%u5C0F%u5E73",
+                "%u9648%u4E91",
+                "%u6C5F%u6CFD%u6C11",
+                "%u674E%u9E4F",
+                "%u6731%u9555%u57FA",
+                "%u674E%u745E%u73AF",
+                "%u5C09%u5065%u884C",
+                "%u674E%u5C9A%u6E05",
+                "%u80E1%u9526%u6D9B",
+                "%u7F57%u5E72",
+                "%u6E29%u5BB6%u5B9D",
+                "%u5434%u90A6%u56FD",
+                "%u66FE%u5E86%u7EA2",
+                "%u8D3E%u5E86%u6797",
+                "%u9EC4%u83CA",
+                "%u5434%u5B98%u6B63",
+                "%u674E%u957F%u6625",
+                "%u5434%u4EEA",
+                "%u56DE%u826F%u7389",
+                "%u66FE%u57F9%u708E",
+                "%u66F9%u521A%u5DDD",
+                "%u5510%u5BB6%u7487",
+                "%u534E%u5EFA%u654F",
+                "%u9648%u81F3%u7ACB",
+                "%u5F20%u5FB7%u6C5F",
+                "%u4FDE%u6B63%u58F0",
+                "%u738B%u4E50%u6CC9",
+                "%u5218%u4E91%u5C71",
+                "%u738B%u521A",
+                "%u738B%u5146%u56FD",
+                "%u5218%u6DC7",
+                "%u8D3A%u56FD%u5F3A",
+                "%u90ED%u4F2F%u96C4",
+                "%u80E1%u8000%u90A6",
+                "%u738B%u4E50%u6CC9",
+                "%u738B%u5146%u56FD",
+                "%u4E60%u8FD1%u5E73",
+                "%u674E%u514B%u5F3A",
+                "%u5F20%u9AD8%u4E3D",
+                "%u5218%u5EF6%u4E1C",
+                "%u5F6D%u4E3D%u5A9B",
+                "%u738B%u5C90%u5C71",
+                "%u534E%u56FD%u950B",
+                "%u80E1%u8000%u90A6",
+                "%u4E60%u5927%u5927",
+                "%u5434%u5E2E%u56FD",
+                "%u65E0%u5E2E%u56FD",
+                "%u65E0%u90A6%u56FD",
+                "%u65E0%u5E2E%u8FC7",
+                "%u761F%u5BB6%u5B9D",
+                "%u5047%u5E86%u6797",
+                "%u7532%u5E86%u6797",
+                "%u5047%u9752%u6797",
+                "%u79BB%u957F%u6625",
+                "%u4E60%u8FDC%u5E73",
+                "%u88AD%u8FD1%u5E73",
+                "%u674E%u78D5%u5899",
+                "%u8D3A%u8FC7%u5899",
+                "%u548C%u9505%u67AA",
+                "%u80E1%u4E3B%u5E2D",
+                "%u4E60%u4E3B%u5E2D",
+                "%u6BDB%u4E3B%u5E2D"
+            ];
+            let bannedWordsTr = [
+                "%u6BDB%u6FA4%u6771",
+                "%u5468%u6069%u4F86",
+                "%u5289%u5C11%u5947",
+                "%u6731%u5FB7",
+                "%u5F6D%u5FB7%u61F7",
+                "%u6797%u5F6A",
+                "%u5289%u4F2F%u627F",
+                "%u9673%u6BC5",
+                "%u8CC0%u9F8D",
+                "%u8076%u69AE%u81FB",
+                "%u5F90%u5411%u524D",
+                "%u7F85%u69AE%u6853",
+                "%u8449%u528D%u82F1",
+                "%u674E%u5927%u91D7",
+                "%u9673%u7368%u79C0",
+                "%u5B6B%u4E2D%u5C71",
+                "%u5B6B%u6587",
+                "%u5B6B%u9038%u4ED9",
+                "%u9127%u5C0F%u5E73",
+                "%u9673%u96F2",
+                "%u6C5F%u6FA4%u6C11",
+                "%u674E%u9D6C",
+                "%u6731%u9555%u57FA",
+                "%u674E%u745E%u74B0",
+                "%u5C09%u5065%u884C",
+                "%u674E%u5D50%u6E05",
+                "%u80E1%u9326%u6FE4",
+                "%u7F85%u5E79",
+                "%u6EAB%u5BB6%u5BF6",
+                "%u5433%u90A6%u570B",
+                "%u66FE%u6176%u7D05",
+                "%u8CC8%u6176%u6797",
+                "%u9EC3%u83CA",
+                "%u5433%u5B98%u6B63",
+                "%u674E%u9577%u6625",
+                "%u5433%u5100",
+                "%u56DE%u826F%u7389",
+                "%u66FE%u57F9%u708E",
+                "%u66F9%u525B%u5DDD",
+                "%u5510%u5BB6%u7487",
+                "%u83EF%u5EFA%u654F",
+                "%u9673%u81F3%u7ACB",
+                "%u5F35%u5FB7%u6C5F",
+                "%u4FDE%u6B63%u8072",
+                "%u738B%u6A02%u6CC9",
+                "%u5289%u96F2%u5C71",
+                "%u738B%u525B",
+                "%u738B%u5146%u570B",
+                "%u5289%u6DC7",
+                "%u8CC0%u570B%u5F37",
+                "%u90ED%u4F2F%u96C4",
+                "%u80E1%u8000%u90A6",
+                "%u738B%u6A02%u6CC9",
+                "%u738B%u5146%u570B",
+                "%u7FD2%u8FD1%u5E73",
+                "%u674E%u514B%u5F37",
+                "%u5F35%u9AD8%u9E97",
+                "%u5289%u5EF6%u6771",
+                "%u5F6D%u9E97%u5A9B",
+                "%u738B%u5C90%u5C71",
+                "%u83EF%u570B%u92D2",
+                "%u80E1%u8000%u90A6",
+                "%u7FD2%u5927%u5927",
+                "%u5433%u5E6B%u570B",
+                "%u7121%u5E6B%u570B",
+                "%u7121%u90A6%u570B",
+                "%u7121%u5E6B%u904E",
+                "%u761F%u5BB6%u5BF6",
+                "%u5047%u6176%u6797",
+                "%u7532%u6176%u6797",
+                "%u5047%u9752%u6797",
+                "%u96E2%u9577%u6625",
+                "%u7FD2%u9060%u5E73",
+                "%u8972%u8FD1%u5E73",
+                "%u674E%u78D5%u58BB",
+                "%u8CC0%u904E%u58BB",
+                "%u548C%u934B%u69CD",
+                "%u80E1%u4E3B%u5E2D",
+                "%u7FD2%u4E3B%u5E2D",
+                "%u6BDB%u4E3B%u5E2D"
+            ];
+            // #endregion
             bannedWords = bannedWords.concat(bannedWordsTr);
+            for (let i = 0, length = bannedWords.length; i < length; i++) {
+                bannedWords[i] = unescape(bannedWords[i]);
+            }
             let search = new StringSearch();
             search.SetKeywords(bannedWords);
             let invalid = search.ContainsAny(nameStr) || nameStr.length > NAME_LENGTH;
             if (!invalid) {
+                // #region 操作面板一系列事件
                 function IsDataValidToSubmit() {
-                    let reg = /(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)+\.(jpg|png|webp|gif)/;
+                    let regPicUrl = /(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)+\.(jpg|png|webp|gif)/;
+                    let regFirstLevelTitle = /^ *# +.+$/gm; // Markdown 不应该包含一级标题，一级标题保留
                     let nameValid, daddyNameValid, markdownValid, backgroundValid, avatarValid, daddyAvatarValid, cloudMusicIdValid;
                     let name = $('.dh-profile-edit-name').val();
                     nameValid = !search.ContainsAny(name) && name.length > 0 && name.length <= NAME_LENGTH;
                     let daddyName = $('.dh-profile-edit-daddy-name').val();
                     daddyNameValid = !search.ContainsAny(daddyName) && daddyName.length > 0 && daddyName.length <= DADDY_NAME_LENGTH;
                     let markdown = $('.dh-profile-edit-markdown').val();
-                    markdownValid = !search.ContainsAny(markdown) && markdown.length > 0 && markdown.length <= MARKDOWN_LENGTH;
+                    markdownValid = !search.ContainsAny(markdown) && !regFirstLevelTitle.test(markdown) && markdown.length > 0 && markdown.length <= MARKDOWN_LENGTH; // 不含一级标题
                     let background = $('.dh-profile-edit-background').val();
-                    backgroundValid = background === '' ? true : reg.test(background);
+                    backgroundValid = background === '' ? true : regPicUrl.test(background);
                     let avatar = $('.dh-profile-edit-avatar').val();
-                    avatarValid = avatar === '' ? true : reg.test(avatar);
+                    avatarValid = avatar === '' ? true : regPicUrl.test(avatar);
                     let daddyAvatar = $('.dh-profile-edit-daddy-avatar').val();
-                    daddyAvatarValid = daddyAvatar === '' ? true : reg.test(daddyAvatar);
+                    daddyAvatarValid = daddyAvatar === '' ? true : regPicUrl.test(daddyAvatar);
                     let cloudMusicId = $('.dh-profile-edit-cloud-music-id').val();
                     cloudMusicIdValid = cloudMusicId === '' ? true : cloudMusicId.length <= CLOUD_MUSIC_ID_LENGTH;
                     return !!(nameValid && daddyNameValid && markdownValid && backgroundValid && avatarValid && daddyAvatarValid && cloudMusicIdValid);
@@ -556,6 +750,7 @@
                         }
                     }
                 });
+                // #endregion
                 function randomItem(array) {
                     return array[Math.floor((Math.random() * array.length))];
                 }
@@ -566,15 +761,8 @@
                         }
                     }
                 }
+                //#region 切换档案
                 function switchProfile(profile) {
-                    const markdowns = [
-                        '都多大了，啥前儿能找个对象啊？\n\n从你爹这里遗传了这么优良的基因、这么迷人的长相，怎么可能没人追呢？\n\n……\n\n（啊？有对象啊？啥前儿搞的？咋不告诉爹呢？）',
-                        '没想到都这么大了，差点儿就认不出来了。\n\n是老爹亏欠了你和你妈啊，当年抛下你娘俩儿去闯荡江湖，好在最终神功练成了！\n\n老爹这就把神功传授给你，就当是对你的补偿了。\n\n《葵花宝典》看到没，都绝版了，这是老爹当年省吃俭用买的二手盗版，现在可是连盗版都找不着了！\n\n……\n\n“**欲练此功，必先自宫**。”\n\n……\n\n欸，我刀呢？拿回来，听话。一会儿就完事儿了，不疼，你老爹也是这么过来的。',
-                        '……\n\n这啥？\n\n娃儿？我啥时候有娃儿了？\n\n……\n\n噢噢噢，想起来了，大前年办宽带送的，一直没用，都落灰了。也用不上，卖了吧。\n\n……\n\n“小孩儿 是公是母不知道 就开了封，没用过 便宜出 可小刀 **仅限同城交易**”',
-                        '你瞅瞅你，一天天扬了二正、吊儿郎当儿的，能有点儿出息不？\n\n你要明白，爸爸的公司将来是要交给你运营的，你现在这副样子，让我怎么放心？你这个能力，世界五百强的公司，你驾驭得住？\n\n我跟你说，好好学习吧！良药苦口利于病，忠言逆耳利于行，我这都是**为你好**，你也别嫌我磨叽。对你严格是让你将来有个好的出路，到时候你会感激的。虎父无犬子吗不是？**别让你老爹失望**。',
-                        '这是哈阿\n\n网站 是什厶.\n\n大儿孑,大闰女教丿教老爹乍用、整不明曰阿|'
-                    ];
-                    const daddyNames = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '高龄猛♂男'];
                     // 注意，这里 profile 里的 template 为与后端同一，都只是模板名称，需要获取模板对象使用 getTemplate
                     let luckyTemplate = randomItem(templates);
                     let luckyMarkdown = randomItem(markdowns);
@@ -604,6 +792,8 @@
                     }
                     currentProfile = profile;
                 }
+                //#endregion
+                // #region AJAX 请求封装
                 function dhRequest(options) {
                     const BASE_URL = 'https://daddyshere.hollisdevhub.com/api/sons';
                     options = options || {};
@@ -668,8 +858,9 @@
                     options.method = 'DELETE';
                     dhRequest(options);
                 }
-                // let templateResources = {};
+                // #endregion
                 const templates = [
+                    // #region “先行者”模板
                     {
                         name: 'forerunner',
                         humanName: '先行者',
@@ -762,6 +953,8 @@
                             console.log(`${profile.template} 模板注销完成。`);
                         }
                     },
+                    // #endregion
+                    // #region “测试”模板
                     // {
                     //     name: 'test',
                     //     humanName: '测试',
@@ -864,6 +1057,7 @@
                     //         console.log(`${profile.template} 模板注销完成。`);
                     //     }
                     // }
+                    // #endregion
                 ];
                 let currentProfile = {};
                 let onlineProfiles = [];
