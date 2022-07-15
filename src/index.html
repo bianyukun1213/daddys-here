@@ -321,7 +321,7 @@
             const MARKDOWN_LENGTH = 1000;
             const MARKDOWN_DEMO = '在这里你可以写普通的文本，也可以写 Markdown 格式的文本。\n\n我这就教你怎么写。\n\n请记住，段落之间留有一行，就像这样。\n\n# 井号和空格打头表示一级标题\n\n## 两个井号就是二级标题\n\n### 以此类推……\n\n星号包裹文字，使之变成*斜体字*。\n\n两边各包两个星号，那么它就是**粗体字**。\n\n要使用~~删除线~~，两边各包两个波浪号。\n\n- 减号和空格打头表示这是一个无序列表，各项之间无需再留一行\n- 你试试\n\n1. 数字、点和空格打头，就成了有序列表\n2. 这是第二项\n\n还可以放图片：\n\n![这里写替换文本，在图片加载失败时显示，盲人的读屏器也会读我，小括号内写图片 Url](https://s1.ax1x.com/2022/07/12/jgGz1s.png)\n\n还有更多用法，可以看 [这个教程](https://www.runoob.com/markdown/md-tutorial.html)。这里碍于篇幅就不一一介绍了。对了，链接的格式和图片很像，只不过没有前面的叹号。\n';
             const CLOUD_MUSIC_ID_LENGTH = 24;
-            let nameStr = hostSplited[0];
+            const nameStr = hostSplited[0];
             let bannedWords = ['毛泽东', '周恩来', '刘少奇', '朱德', '彭德怀', '林彪', '刘伯承', '陈毅', '贺龙', '聂荣臻', '徐向前', '罗荣桓', '叶剑英', '李大钊', '陈独秀', '孙中山', '孙文', '孙逸仙', '邓小平', '陈云', '江泽民', '李鹏', '朱镕基', '李瑞环', '尉健行', '李岚清', '胡锦涛', '罗干', '温家宝', '吴邦国', '曾庆红', '贾庆林', '黄菊', '吴官正', '李长春', '吴仪', '回良玉', '曾培炎', '曹刚川', '唐家璇', '华建敏', '陈至立', '张德江', '俞正声', '王乐泉', '刘云山', '王刚', '王兆国', '刘淇', '贺国强', '郭伯雄', '胡耀邦', '王乐泉', '王兆国', '习近平', '李克强', '张高丽', '刘延东', '彭丽媛', '王岐山', '华国锋', '胡耀邦', '习大大', '吴帮国', '无帮国', '无邦国', '无帮过', '瘟家宝', '假庆林', '甲庆林', '假青林', '离长春', '习远平', '袭近平', '李磕墙', '贺过墙', '和锅枪', '胡主席', '习主席', '毛主席'];
             let bannedWordsTr = ['毛澤東', '周恩來', '劉少奇', '朱德', '彭德懷', '林彪', '劉伯承', '陳毅', '賀龍', '聶榮臻', '徐向前', '羅榮桓', '葉劍英', '李大釗', '陳獨秀', '孫中山', '孫文', '孫逸仙', '鄧小平', '陳雲', '江澤民', '李鵬', '朱镕基', '李瑞環', '尉健行', '李嵐清', '胡錦濤', '羅幹', '溫家寶', '吳邦國', '曾慶紅', '賈慶林', '黃菊', '吳官正', '李長春', '吳儀', '回良玉', '曾培炎', '曹剛川', '唐家璇', '華建敏', '陳至立', '張德江', '俞正聲', '王樂泉', '劉雲山', '王剛', '王兆國', '劉淇', '賀國強', '郭伯雄', '胡耀邦', '王樂泉', '王兆國', '習近平', '李克強', '張高麗', '劉延東', '彭麗媛', '王岐山', '華國鋒', '胡耀邦', '習大大', '吳幫國', '無幫國', '無邦國', '無幫過', '瘟家寶', '假慶林', '甲慶林', '假青林', '離長春', '習遠平', '襲近平', '李磕墻', '賀過墻', '和鍋槍', '胡主席', '習主席', '毛主席'];
             bannedWords = bannedWords.concat(bannedWordsTr);
@@ -487,7 +487,8 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    window.location.reload();
+                                    // window.location.reload();
+                                    window.location.href = `https://${name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
                                     alert(`失败：${code ? msg : status}。`)
@@ -521,7 +522,8 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    window.location.reload();
+                                    // window.location.reload();
+                                    window.location.href = `https://${name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
                                     alert(`失败：${code ? msg : status}。`)
@@ -540,7 +542,8 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    window.location.reload();
+                                    // window.location.reload();
+                                    window.location.href = `https://${name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
                                     alert(`失败：${code ? msg : status}。`)
@@ -564,14 +567,14 @@
                     }
                 }
                 function switchProfile(profile) {
-                    let markdowns = [
+                    const markdowns = [
                         '都多大了，啥前儿能找个对象啊？\n\n从你爹这里遗传了这么优良的基因、这么迷人的长相，怎么可能没人追呢？\n\n……\n\n（啊？有对象啊？啥前儿搞的？咋不告诉爹呢？）',
                         '没想到都这么大了，差点儿就认不出来了。\n\n是老爹亏欠了你和你妈啊，当年抛下你娘俩儿去闯荡江湖，好在最终神功练成了！\n\n老爹这就把神功传授给你，就当是对你的补偿了。\n\n《葵花宝典》看到没，都绝版了，这是老爹当年省吃俭用买的二手盗版，现在可是连盗版都找不着了！\n\n……\n\n“**欲练此功，必先自宫**。”\n\n……\n\n欸，我刀呢？拿回来，听话。一会儿就完事儿了，不疼，你老爹也是这么过来的。',
                         '……\n\n这啥？\n\n娃儿？我啥时候有娃儿了？\n\n……\n\n噢噢噢，想起来了，大前年办宽带送的，一直没用，都落灰了。也用不上，卖了吧。\n\n……\n\n“小孩儿 是公是母不知道 就开了封，没用过 便宜出 可小刀 **仅限同城交易**”',
                         '你瞅瞅你，一天天扬了二正、吊儿郎当儿的，能有点儿出息不？\n\n你要明白，爸爸的公司将来是要交给你运营的，你现在这副样子，让我怎么放心？你这个能力，世界五百强的公司，你驾驭得住？\n\n我跟你说，好好学习吧！良药苦口利于病，忠言逆耳利于行，我这都是**为你好**，你也别嫌我磨叽。对你严格是让你将来有个好的出路，到时候你会感激的。虎父无犬子吗不是？**别让你老爹失望**。',
                         '这是哈阿\n\n网站 是什厶.\n\n大儿孑,大闰女教丿教老爹乍用、整不明曰阿|'
                     ];
-                    let daddyNames = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '高龄猛♂男'];
+                    const daddyNames = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '高龄猛♂男'];
                     // 注意，这里 profile 里的 template 为与后端同一，都只是模板名称，需要获取模板对象使用 getTemplate
                     let luckyTemplate = randomItem(templates);
                     let luckyMarkdown = randomItem(markdowns);
@@ -665,8 +668,8 @@
                     options.method = 'DELETE';
                     dhRequest(options);
                 }
-                let templateResources = {};
-                let templates = [
+                // let templateResources = {};
+                const templates = [
                     {
                         name: 'forerunner',
                         humanName: '先行者',
@@ -674,6 +677,7 @@
                             avatars: [['./imgs/template-forerunner/daddy-1.webp', './imgs/template-forerunner/son-1.webp'], ['./imgs/template-forerunner/daddy-2.webp', './imgs/template-forerunner/son-2.webp']], // forerunner 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
                             // backgrounds: ['./imgs/template-forerunner/bg-1.jpg', './imgs/template-forerunner/bg-2.jpg'] // 背景图片很难找到合适的，干脆就不提供了
                         },
+                        runtimeResources: {},
                         initialize: function (profile) {
                             // 用匿名函数的话，this 就指向 window 而不是模板对象了
                             console.log(`${profile.template} 模板初始化。`);
@@ -721,15 +725,17 @@
                                         return oldContent + ' / 受保护';
                                     });
                                 }
-                                if (profile.reserved) {
-                                    profileInfo.text((index, oldContent) => {
-                                        return oldContent + ' / 长期保存';
-                                    });
-                                }
                                 else {
-                                    profileInfo.text((index, oldContent) => {
-                                        return oldContent + ` / 将于 ${profile.expiration.split('T')[0]} 过期`;
-                                    });
+                                    if (profile.reserved) {
+                                        profileInfo.text((index, oldContent) => {
+                                            return oldContent + ' / 长期保存';
+                                        });
+                                    }
+                                    else {
+                                        profileInfo.text((index, oldContent) => {
+                                            return oldContent + ` / 将于 ${profile.expiration.split('T')[0]} 过期`;
+                                        });
+                                    }
                                 }
                             }
                             else {
