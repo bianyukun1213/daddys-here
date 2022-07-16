@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敏感姓名编码</title>
+    <!-- <script src="./ToolGood.Words.Translate.min.js"></script>
+    <script src="./ToolGood.Words.Pinyin.min.js"></script> -->
+    <script src="./src/js/pinyin-pro.js"></script>
+</head>
+
+<body>
+    <script>
+        const { pinyin } = pinyinPro;
+        function encodeStr(str, offset) {
+            let encoded = '';
+            for (let i = 0, length = str.length; i < length; i++) {
+                let pos = str.charCodeAt(i);
+                let posWithOffset = pos + offset;
+                encoded += String.fromCharCode(posWithOffset);
+            }
+            return encoded;
+        }
+        // let translate = new Translate();
+        // let pinyin = new Pinyin();
+        let bannedWords = JSON.parse(prompt('敏感姓名数组：').replace(/'/g, '"'));
+        // let bannedWordsTr = [];
+        // let bannedWordsHK = [];
+        // let bannedWordsTW = [];
+        let bannedWordsPy = [];
+        for (let i = 0, length = bannedWords.length; i < length; i++) {
+            // bannedWordsTr.push(translate.ToTraditionalChinese(bannedWords[i]));
+            // bannedWordsHK.push(translate.ToTraditionalChinese(bannedWords[i], 1));
+            // bannedWordsHK.push(translate.ToTraditionalChinese(bannedWords[i], 2));
+            // bannedWordsPy.push(pinyin.GetPinyin(bannedWords[i]).toLowerCase());
+            bannedWordsPy.push(pinyin(bannedWords[i], { toneType: 'none', mode: 'surname', removeNonZh: true }).replace(/ /g, ''));
+        }
+        console.log(bannedWordsPy)
+        // let words = Array.from(new Set(bannedWords.concat(bannedWordsTr).concat(bannedWordsHK).concat(bannedWordsTW).concat(bannedWordsPy)));
+        let words = Array.from(new Set(bannedWordsPy));
+        let encoded = [];
+        for (let i = 0, length = words.length; i < length; i++) {
+            encoded.push(encodeStr(words[i], 8));
+        }
+        console.log(encoded);
+        alert('编码完成，请到控制台复制。');
+    </script>
+</body>
+
+</html>

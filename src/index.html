@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="./css/unreset.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.1.1/css/all.min.css">
     <script src="./js/punycode.js"></script>
-    <script src="./js/ToolGood.Words.StringSearch.min.js"></script>
+    <script src="./js/pinyin-pro.js"></script>
+    <script src="./js/fastscan.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/dompurify/2.3.8/purify.min.js"></script>
     <script src="https://cdn.staticfile.org/marked/4.0.17/marked.min.js"></script>
@@ -331,200 +332,124 @@
             hostSplited = punycode.ToUnicode(window.location.host).split('.');
         }
         if (hostSplited.length !== 3) {
-            // $('.dh-loading-screen').addClass('hidden');
-            // $('.dh-hint-screen').removeClass('hidden');
             window.location.href = 'https://大儿砸.我是你爹.com';
         }
         else {
+            let { pinyin } = pinyinPro; // 引入 pinyinPro
+            // #region 敏感姓名检测
+            function encodeStr(str, offset) {
+                let encoded = '';
+                for (let i = 0, length = str.length; i < length; i++) {
+                    let pos = str.charCodeAt(i);
+                    let posWithOffset = pos + offset;
+                    encoded += String.fromCharCode(posWithOffset);
+                }
+                return encoded;
+            }
+            // 转小写，去掉各种符号（包括零宽字符）、音调、空格
+            function removeSymbols(str) {
+                return str.toLowerCase().normalize('NFD').replace(/[\p{C}\p{M}\p{N}\p{P}\p{S} ]/gu, '');
+            }
+            // 检测
+            function isWordValid(str) {
+                // 移除符号，转拼音，检测
+                return scanner.search(pinyin(removeSymbols(str), { toneType: 'none', mode: 'surname', removeNonZh: true }).replace(/ /g, ''), { quick: true, longest: false }).length === 0 ? true : false;
+            }
+            // #endregion
             // #region 各种常量
             const NAME_LENGTH = 16;
+            $('.dh-profile-edit-name').attr('maxlength', NAME_LENGTH);
             const DADDY_NAME_LENGTH = 16;
+            $('.dh-profile-edit-daddy-name').attr('maxlength', DADDY_NAME_LENGTH);
             const MARKDOWN_LENGTH = 1000;
+            $('.dh-profile-edit-markdown').attr('maxlength', MARKDOWN_LENGTH);
             const MARKDOWN_DEMO = '在这里你可以写普通的文本，也可以写 Markdown 格式的文本。\n\n我这就教你怎么写。\n\n请记住，段落之间留有一行，就像这样。\n\n# 井号和空格打头表示一级标题\n\n## 两个井号就是二级标题\n\n### 以此类推……\n\n但提交时请**不要**包含一级标题，因为一个网页应该只有一个一级标题，而这个一级标题我保留了。\n\n星号包裹文字，使之变成*斜体字*。\n\n两边各包两个星号，那么它就是**粗体字**。\n\n要使用~~删除线~~，两边各包两个波浪号。\n\n- 减号和空格打头表示这是一个无序列表，各项之间无需再留一行\n- 你试试\n\n1. 数字、点和空格打头，就成了有序列表\n2. 这是第二项\n\n还可以放图片：\n\n![这里写替换文本；图片 Url 写在小括号内](https://s1.ax1x.com/2022/07/12/jgGz1s.png)\n\n还有更多用法，可以看 [这个教程](https://www.runoob.com/markdown/md-tutorial.html)。这里碍于篇幅就不一一介绍了。对了，链接的格式和图片很像，只不过没有前面的叹号。\n';
             const CLOUD_MUSIC_ID_LENGTH = 24;
-            const nameStr = hostSplited[0];
-            const markdowns = [
+            const NAME_STR = hostSplited[0];
+            const MARKDOWNS = [
                 '都多大了，啥前儿能找个对象啊？\n\n从你爹这里遗传了这么优良的基因、这么迷人的长相，怎么可能没人追呢？\n\n……\n\n（啊？有对象啊？啥前儿搞的？咋不告诉爹呢？）',
                 '没想到都这么大了，差点儿就认不出来了。\n\n是老爹亏欠了你和你妈啊，当年抛下你娘俩儿去闯荡江湖，好在最终神功练成了！\n\n老爹这就把神功传授给你，就当是对你的补偿了。\n\n《葵花宝典》看到没，都绝版了，这是老爹当年省吃俭用买的二手盗版，现在可是连盗版都找不着了！\n\n……\n\n“**欲练此功，必先自宫**。”\n\n……\n\n欸，我刀呢？拿回来，听话。一会儿就完事儿了，不疼，你老爹也是这么过来的。',
                 '……\n\n这啥？\n\n娃儿？我啥时候有娃儿了？\n\n……\n\n噢噢噢，想起来了，大前年办宽带送的，一直没用，都落灰了。也用不上，卖了吧。\n\n……\n\n“小孩儿 是公是母不知道 就开了封，没用过 便宜出 可小刀 **仅限同城交易**”',
                 '你瞅瞅你，一天天扬了二正、吊儿郎当儿的，能有点儿出息不？\n\n你要明白，爸爸的公司将来是要交给你运营的，你现在这副样子，让我怎么放心？你这个能力，世界五百强的公司，你驾驭得住？\n\n我跟你说，好好学习吧！良药苦口利于病，忠言逆耳利于行，我这都是**为你好**，你也别嫌我磨叽。对你严格是让你将来有个好的出路，到时候你会感激的。虎父无犬子吗不是？**别让你老爹失望**。',
                 '这是哈阿\n\n网站 是什厶.\n\n大儿孑,大闰女教丿教老爹乍用、整不明曰阿|'
             ];
-            const daddyNames = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '高龄猛♂男'];
-            // #endregion
+            const DADDY_NAMES = ['默默无闻的老父亲', '某神秘男子', '不知死活的网友', '浏览器', '隐世多年的银河首富', '亚洲第一帅', '火星驻地球大使', '隔壁老王', '某非洲酋长', '高龄猛♂男'];
             // #region 各种敏感姓名
-            let bannedWords = [
-                "%u6BDB%u6CFD%u4E1C",
-                "%u5468%u6069%u6765",
-                "%u5218%u5C11%u5947",
-                "%u6731%u5FB7",
-                "%u5F6D%u5FB7%u6000",
-                "%u6797%u5F6A",
-                "%u5218%u4F2F%u627F",
-                "%u9648%u6BC5",
-                "%u8D3A%u9F99",
-                "%u8042%u8363%u81FB",
-                "%u5F90%u5411%u524D",
-                "%u7F57%u8363%u6853",
-                "%u53F6%u5251%u82F1",
-                "%u674E%u5927%u948A",
-                "%u9648%u72EC%u79C0",
-                "%u5B59%u4E2D%u5C71",
-                "%u5B59%u6587",
-                "%u5B59%u9038%u4ED9",
-                "%u9093%u5C0F%u5E73",
-                "%u9648%u4E91",
-                "%u6C5F%u6CFD%u6C11",
-                "%u674E%u9E4F",
-                "%u6731%u9555%u57FA",
-                "%u674E%u745E%u73AF",
-                "%u5C09%u5065%u884C",
-                "%u674E%u5C9A%u6E05",
-                "%u80E1%u9526%u6D9B",
-                "%u7F57%u5E72",
-                "%u6E29%u5BB6%u5B9D",
-                "%u5434%u90A6%u56FD",
-                "%u66FE%u5E86%u7EA2",
-                "%u8D3E%u5E86%u6797",
-                "%u9EC4%u83CA",
-                "%u5434%u5B98%u6B63",
-                "%u674E%u957F%u6625",
-                "%u5434%u4EEA",
-                "%u56DE%u826F%u7389",
-                "%u66FE%u57F9%u708E",
-                "%u66F9%u521A%u5DDD",
-                "%u5510%u5BB6%u7487",
-                "%u534E%u5EFA%u654F",
-                "%u9648%u81F3%u7ACB",
-                "%u5F20%u5FB7%u6C5F",
-                "%u4FDE%u6B63%u58F0",
-                "%u738B%u4E50%u6CC9",
-                "%u5218%u4E91%u5C71",
-                "%u738B%u521A",
-                "%u738B%u5146%u56FD",
-                "%u5218%u6DC7",
-                "%u8D3A%u56FD%u5F3A",
-                "%u90ED%u4F2F%u96C4",
-                "%u80E1%u8000%u90A6",
-                "%u738B%u4E50%u6CC9",
-                "%u738B%u5146%u56FD",
-                "%u4E60%u8FD1%u5E73",
-                "%u674E%u514B%u5F3A",
-                "%u5F20%u9AD8%u4E3D",
-                "%u5218%u5EF6%u4E1C",
-                "%u5F6D%u4E3D%u5A9B",
-                "%u738B%u5C90%u5C71",
-                "%u534E%u56FD%u950B",
-                "%u80E1%u8000%u90A6",
-                "%u4E60%u5927%u5927",
-                "%u5434%u5E2E%u56FD",
-                "%u65E0%u5E2E%u56FD",
-                "%u65E0%u90A6%u56FD",
-                "%u65E0%u5E2E%u8FC7",
-                "%u761F%u5BB6%u5B9D",
-                "%u5047%u5E86%u6797",
-                "%u7532%u5E86%u6797",
-                "%u5047%u9752%u6797",
-                "%u79BB%u957F%u6625",
-                "%u4E60%u8FDC%u5E73",
-                "%u88AD%u8FD1%u5E73",
-                "%u674E%u78D5%u5899",
-                "%u8D3A%u8FC7%u5899",
-                "%u548C%u9505%u67AA",
-                "%u80E1%u4E3B%u5E2D",
-                "%u4E60%u4E3B%u5E2D",
-                "%u6BDB%u4E3B%u5E2D"
-            ];
-            let bannedWordsTr = [
-                "%u6BDB%u6FA4%u6771",
-                "%u5468%u6069%u4F86",
-                "%u5289%u5C11%u5947",
-                "%u6731%u5FB7",
-                "%u5F6D%u5FB7%u61F7",
-                "%u6797%u5F6A",
-                "%u5289%u4F2F%u627F",
-                "%u9673%u6BC5",
-                "%u8CC0%u9F8D",
-                "%u8076%u69AE%u81FB",
-                "%u5F90%u5411%u524D",
-                "%u7F85%u69AE%u6853",
-                "%u8449%u528D%u82F1",
-                "%u674E%u5927%u91D7",
-                "%u9673%u7368%u79C0",
-                "%u5B6B%u4E2D%u5C71",
-                "%u5B6B%u6587",
-                "%u5B6B%u9038%u4ED9",
-                "%u9127%u5C0F%u5E73",
-                "%u9673%u96F2",
-                "%u6C5F%u6FA4%u6C11",
-                "%u674E%u9D6C",
-                "%u6731%u9555%u57FA",
-                "%u674E%u745E%u74B0",
-                "%u5C09%u5065%u884C",
-                "%u674E%u5D50%u6E05",
-                "%u80E1%u9326%u6FE4",
-                "%u7F85%u5E79",
-                "%u6EAB%u5BB6%u5BF6",
-                "%u5433%u90A6%u570B",
-                "%u66FE%u6176%u7D05",
-                "%u8CC8%u6176%u6797",
-                "%u9EC3%u83CA",
-                "%u5433%u5B98%u6B63",
-                "%u674E%u9577%u6625",
-                "%u5433%u5100",
-                "%u56DE%u826F%u7389",
-                "%u66FE%u57F9%u708E",
-                "%u66F9%u525B%u5DDD",
-                "%u5510%u5BB6%u7487",
-                "%u83EF%u5EFA%u654F",
-                "%u9673%u81F3%u7ACB",
-                "%u5F35%u5FB7%u6C5F",
-                "%u4FDE%u6B63%u8072",
-                "%u738B%u6A02%u6CC9",
-                "%u5289%u96F2%u5C71",
-                "%u738B%u525B",
-                "%u738B%u5146%u570B",
-                "%u5289%u6DC7",
-                "%u8CC0%u570B%u5F37",
-                "%u90ED%u4F2F%u96C4",
-                "%u80E1%u8000%u90A6",
-                "%u738B%u6A02%u6CC9",
-                "%u738B%u5146%u570B",
-                "%u7FD2%u8FD1%u5E73",
-                "%u674E%u514B%u5F37",
-                "%u5F35%u9AD8%u9E97",
-                "%u5289%u5EF6%u6771",
-                "%u5F6D%u9E97%u5A9B",
-                "%u738B%u5C90%u5C71",
-                "%u83EF%u570B%u92D2",
-                "%u80E1%u8000%u90A6",
-                "%u7FD2%u5927%u5927",
-                "%u5433%u5E6B%u570B",
-                "%u7121%u5E6B%u570B",
-                "%u7121%u90A6%u570B",
-                "%u7121%u5E6B%u904E",
-                "%u761F%u5BB6%u5BF6",
-                "%u5047%u6176%u6797",
-                "%u7532%u6176%u6797",
-                "%u5047%u9752%u6797",
-                "%u96E2%u9577%u6625",
-                "%u7FD2%u9060%u5E73",
-                "%u8972%u8FD1%u5E73",
-                "%u674E%u78D5%u58BB",
-                "%u8CC0%u904E%u58BB",
-                "%u548C%u934B%u69CD",
-                "%u80E1%u4E3B%u5E2D",
-                "%u7FD2%u4E3B%u5E2D",
-                "%u6BDB%u4E3B%u5E2D"
+            const BANNED_WORDS = [
+                "uiwmlwvo",
+                "pw}mvtiq",
+                "tq}{piwyq",
+                "p}lm",
+                "xmvolmp}iq",
+                "tqvjqiw",
+                "tq}jwkpmvo",
+                "kpmvq",
+                "pmtwvo",
+                "vqmzwvopmv",
+                "}qivoyqiv",
+                "t}wzwvop}iv",
+                "mrqivqvo",
+                "tqlipiw",
+                "kpmvl}q}",
+                "}vpwvo{piv",
+                "}vmv",
+                "}vqqiv",
+                "lmvoqiwxqvo",
+                "kpmv}v",
+                "rqivomuqv",
+                "tqxmvo",
+                "p}zwvorq",
+                "tqz}qp}iv",
+                "mqrqivpivo",
+                "tqtivyqvo",
+                "p}rqv|iw",
+                "t}woiv",
+                "mvrqijiw",
+                "}jivoo}w",
+                "mvoyqvopwvo",
+                "rqiyqvotqv",
+                "p}ivor}",
+                "}o}ivpmvo",
+                "tqpivokp}v",
+                "}q",
+                "p}qtqivo}",
+                "mvoxmqiv",
+                "kiwoivokp}iv",
+                "|ivorqi}iv",
+                "p}irqivuqv",
+                "kpmvpqtq",
+                "pivolmrqivo",
+                "}pmvo{pmvo",
+                "ivo}my}iv",
+                "tq}}v{piv",
+                "ivooivo",
+                "ivopiwo}w",
+                "tq}yq",
+                "pmo}wyqivo",
+                "o}wjwqwvo",
+                "p}iwjivo",
+                "qrqvxqvo",
+                "tqsmyqivo",
+                "pivooiwtq",
+                "tq}ivlwvo",
+                "xmvotq}iv",
+                "ivoyq{piv",
+                "p}io}wnmvo",
+                "qlili",
+                "q}ivxqvo",
+                "p}p}q",
+                "qp}q",
+                "uiwp}q"
             ];
             // #endregion
-            bannedWords = bannedWords.concat(bannedWordsTr);
-            for (let i = 0, length = bannedWords.length; i < length; i++) {
-                bannedWords[i] = unescape(bannedWords[i]);
+            // #endregion
+            // 解码敏感姓名数组
+            for (let i = 0, length = BANNED_WORDS.length; i < length; i++) {
+                BANNED_WORDS[i] = encodeStr(BANNED_WORDS[i], -8);
             }
-            let search = new StringSearch();
-            search.SetKeywords(bannedWords);
-            let invalid = search.ContainsAny(nameStr) || nameStr.length > NAME_LENGTH;
+            let scanner = new FastScanner(BANNED_WORDS);
+            // 长度判断放前面，这样长度不合适直接拦掉，不用检测敏感姓名了
+            let invalid = NAME_STR.length > NAME_LENGTH || !isWordValid(NAME_STR);
             if (!invalid) {
                 // #region 操作面板一系列事件
                 function IsDataValidToSubmit() {
@@ -532,11 +457,11 @@
                     let regFirstLevelTitle = /^ *# +.+$/gm; // Markdown 不应该包含一级标题，一级标题保留
                     let nameValid, daddyNameValid, markdownValid, backgroundValid, avatarValid, daddyAvatarValid, cloudMusicIdValid;
                     let name = $('.dh-profile-edit-name').val();
-                    nameValid = !search.ContainsAny(name) && name.length > 0 && name.length <= NAME_LENGTH;
+                    nameValid = isWordValid(name) && name.length > 0 && name.length <= NAME_LENGTH;
                     let daddyName = $('.dh-profile-edit-daddy-name').val();
-                    daddyNameValid = !search.ContainsAny(daddyName) && daddyName.length > 0 && daddyName.length <= DADDY_NAME_LENGTH;
+                    daddyNameValid = isWordValid(daddyName) && daddyName.length > 0 && daddyName.length <= DADDY_NAME_LENGTH;
                     let markdown = $('.dh-profile-edit-markdown').val();
-                    markdownValid = !search.ContainsAny(markdown) && !regFirstLevelTitle.test(markdown) && markdown.length > 0 && markdown.length <= MARKDOWN_LENGTH; // 不含一级标题
+                    markdownValid = isWordValid(markdown) && !regFirstLevelTitle.test(markdown) && markdown.length > 0 && markdown.length <= MARKDOWN_LENGTH; // 不含一级标题
                     let background = $('.dh-profile-edit-background').val();
                     backgroundValid = background === '' ? true : regPicUrl.test(background);
                     let avatar = $('.dh-profile-edit-avatar').val();
@@ -607,8 +532,8 @@
                     }
                     $('.dh-profile-edit-types').val('create'); // 设置 value 为 'create' 的一项选中
                     $('.dh-profile-edit-template option').remove();
-                    for (let i = 0, length = templates.length; i < length; i++) {
-                        $('.dh-profile-edit-template').append(`<option value="${templates[i].name}">${templates[i].humanName}${templates[i].name === currentProfile.template ? '（当前）' : ''}</option>`);
+                    for (let i = 0, length = TEMPLATES.length; i < length; i++) {
+                        $('.dh-profile-edit-template').append(`<option value="${TEMPLATES[i].name}">${TEMPLATES[i].humanName}${TEMPLATES[i].name === currentProfile.template ? '（当前）' : ''}</option>`);
                     }
                     $('.dh-profile-edit-template').val(currentProfile.template);
                     $('.dh-profile-edit-gender').val('0'); // 设置 value 为 '0' 的一项选中
@@ -687,7 +612,6 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    // window.location.reload();
                                     window.location.href = `https://${name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
@@ -722,7 +646,6 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    // window.location.reload();
                                     window.location.href = `https://${name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
@@ -742,7 +665,6 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    // window.location.reload();
                                     window.location.href = `https://${name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
@@ -761,20 +683,20 @@
                     return array[Math.floor((Math.random() * array.length))];
                 }
                 function getTemplate(name) {
-                    for (let i = 0, length = templates.length; i < length; i++) {
-                        if (name === templates[i].name) {
-                            return templates[i];
+                    for (let i = 0, length = TEMPLATES.length; i < length; i++) {
+                        if (name === TEMPLATES[i].name) {
+                            return TEMPLATES[i];
                         }
                     }
                 }
-                //#region 切换档案
+                // #region 切换档案
                 function switchProfile(profile) {
                     // 注意，这里 profile 里的 template 为与后端同一，都只是模板名称，需要获取模板对象使用 getTemplate
-                    let luckyTemplate = randomItem(templates);
-                    let luckyMarkdown = randomItem(markdowns);
-                    let luckyDaddy = randomItem(daddyNames);
+                    let luckyTemplate = randomItem(TEMPLATES);
+                    let luckyMarkdown = randomItem(MARKDOWNS);
+                    let luckyDaddy = randomItem(DADDY_NAMES);
                     let localProfile = {
-                        name: nameStr,
+                        name: NAME_STR,
                         daddy: luckyDaddy,
                         markdown: luckyMarkdown,
                         template: luckyTemplate.name
@@ -798,7 +720,7 @@
                     }
                     currentProfile = profile;
                 }
-                //#endregion
+                // #endregion
                 // #region AJAX 请求封装
                 function dhRequest(options) {
                     const BASE_URL = 'https://daddyshere.hollisdevhub.com/api/sons';
@@ -865,21 +787,20 @@
                     dhRequest(options);
                 }
                 // #endregion
-                const templates = [
+                const TEMPLATES = [
                     // #region “先行者”模板
                     {
                         name: 'forerunner',
                         humanName: '先行者',
                         data: {
-                            avatars: [['./imgs/template-forerunner/daddy-1.webp', './imgs/template-forerunner/son-1.webp'], ['./imgs/template-forerunner/daddy-2.webp', './imgs/template-forerunner/son-2.webp']], // forerunner 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
-                            // backgrounds: ['./imgs/template-forerunner/bg-1.jpg', './imgs/template-forerunner/bg-2.jpg'] // 背景图片很难找到合适的，干脆就不提供了
+                            avatars: [['./imgs/template-forerunner/daddy-1.webp', './imgs/template-forerunner/son-1.webp'], ['./imgs/template-forerunner/daddy-2.webp', './imgs/template-forerunner/son-2.webp']] // forerunner 模板提供默认头像，但模板并非必须提供默认头像。实际上，模板不一定显示头像。switchProfile 仅处理必需的数据，其他数据由模板自己处理
                         },
                         runtimeResources: {},
                         initialize: function (profile) {
                             // 用匿名函数的话，this 就指向 window 而不是模板对象了
                             console.log(`${profile.template} 模板初始化。`);
                             $(`.dh-template-${profile.template} .dh-title-name`).text(profile.name);
-                            let daddyCensored = search.Replace(profile.daddy, '❤️');
+                            let daddyCensored = isWordValid(profile.daddy) ? profile.daddy : '❤️';
                             $(`.dh-template-${profile.template} .dh-daddy-name`).text(daddyCensored);
                             let luckyAvatar = randomItem(this.data.avatars);
                             if (profile.daddyAvatar) {
@@ -894,14 +815,10 @@
                             else {
                                 $(`.dh-template-${profile.template} .dh-avatar-img`).attr('src', luckyAvatar[1]);
                             }
-                            // let luckyBackground = randomItem(this.data.backgrounds);
                             if (profile.background) {
                                 $(`.dh-template-${profile.template}`).css('background-image', `url(${profile.background})`);
                             }
-                            // else {
-                            //     $(`.dh-template-${profile.template}`).css('background-image', `url(${luckyBackground})`);
-                            // }
-                            let markdownCensored = search.Replace(profile.markdown, '❤️');
+                            let markdownCensored = isWordValid(profile.markdown) ? profile.markdown : '❤️';
                             $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
                             $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
                             $(`.dh-template-${profile.template} .dh-markdown a`).addClass('text-blue-500 hover:text-blue-600');
@@ -923,23 +840,15 @@
                                     });
                                 }
                                 else {
-                                    // if (profile.reserved) {
-                                    //     profileInfo.text((index, oldContent) => {
-                                    //         return oldContent + ' / 长期保存';
-                                    //     });
-                                    // }
-                                    // else {
                                     profileInfo.text((index, oldContent) => {
                                         return oldContent + ` / 将于 ${profile.expiration.split('T')[0]} 过期`;
                                     });
-                                    // }
                                 }
                             }
                             else {
                                 $(`.dh-template-${profile.template} .dh-profile-info`).text('本地档案');
                             }
                             profileInfo.click(() => {
-                                // alert('本地档案：使用 JavaScript 代码在浏览器中即时生成，不会保存\n云端档案：由云端返回，在云端保存\n姓名唯一：无法创建同名档案或修改某档案使其与之同名\n受保护：无法修改或删除，不会被自动删除\n长期保存：不会被自动删除\n将于某日过期：在某日自动删除');
                                 alert('本地档案：使用 JavaScript 代码在浏览器中即时生成，不会保存\n云端档案：由云端返回，在云端保存\n姓名唯一：无法创建同名档案或修改某档案使其与之同名\n受保护：无法修改或删除，不会被自动删除\n将于某日过期：在某日自动删除');
                             });
                             $(`.dh-template-${profile.template}`).removeClass('hidden');
@@ -1069,7 +978,7 @@
                 let currentProfile = {};
                 let onlineProfiles = [];
                 dhGet({
-                    entry: `/get-by-name/${nameStr}`,
+                    entry: `/get-by-name/${NAME_STR}`,
                     success: (res) => {
                         onlineProfiles = res;
                         let hashId = window.location.hash.replace('#', '');
