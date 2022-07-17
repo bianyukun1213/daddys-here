@@ -522,7 +522,7 @@
                 });
                 // 编辑档案按钮点击事件
                 $('.dh-function-btn-edit-profile').click(() => {
-                    if (currentProfile.id) {
+                    if (currentProfile.id && !currentProfile.protected) {
                         $('.dh-profile-edit-types option[value="update"]').removeAttr('disabled', 'disabled');
                         $('.dh-profile-edit-types option[value="delete"]').removeAttr('disabled', 'disabled');
                     }
@@ -578,6 +578,11 @@
                 });
                 // 编辑档案确认事件
                 $('.dh-profile-edit-confirm').click(() => {
+                    let value = $('.dh-profile-edit-types').val();
+                    if (currentProfile.protected && value !== 'create') {
+                        alert('这份档案受保护，你无法修改或删除。');
+                        return;
+                    }
                     if (confirm('此操作无法撤回，数据无法恢复到之前的状态，是否继续？')) {
                         let name = $('.dh-profile-edit-name').val();
                         let gender = parseInt($('.dh-profile-edit-gender').val(), 10);
@@ -588,7 +593,6 @@
                         let avatar = $('.dh-profile-edit-avatar').val();
                         let daddyAvatar = $('.dh-profile-edit-daddy-avatar').val();
                         let cloudMusicId = $('.dh-profile-edit-cloud-music-id').val();
-                        let value = $('.dh-profile-edit-types').val();
                         if (value === 'create') {
                             if (!IsDataValidToSubmit()) {
                                 alert('数据错误或不适宜！');
