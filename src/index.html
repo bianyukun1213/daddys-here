@@ -339,14 +339,25 @@
                 }
                 return encoded;
             }
-            // 转小写，去掉各种符号（包括零宽字符）、音调、空格
-            function removeSymbols(str) {
+            // 转小写，去掉各种符号（包括零宽字符）、音调、空格，严格模式下只保留英文字母
+            function removeSymbols(str, strict) {
+                if (strict) {
+                    return str.toLowerCase().replace(/[^a-z]/g, '');
+                }
                 return str.toLowerCase().normalize('NFD').replace(/[\p{C}\p{M}\p{N}\p{P}\p{S} ]/gu, '');
             }
             // 检测
             function isWordValid(str) {
                 // 移除符号，转拼音，检测
-                return scanner.search(pinyin(removeSymbols(str), { toneType: 'none', mode: 'surname', removeNonZh: true }).replace(/ /g, ''), { quick: true, longest: false }).length === 0 ? true : false;
+                // 匹配 min哈gan哈xing哈ming
+                let onlyEngChars = removeSymbols(str, true);
+                // 匹配 mingan姓名
+                let pinyinWithNonZh = pinyin(removeSymbols(str), { toneType: 'none', mode: 'surname', removeNonZh: false }).replace(/ /g, '');
+                // 匹配 敏ha感ha姓ha名
+                let pinyinWithoutNonZh = pinyin(removeSymbols(str), { toneType: 'none', mode: 'surname', removeNonZh: true }).replace(/ /g, '');
+                let valid = scanner.search(onlyEngChars, { quick: true, longest: false }).length === 0 ? true : false;
+                valid = valid && (scanner.search(pinyinWithNonZh, { quick: true, longest: false }).length === 0 ? true : false);
+                return valid && (scanner.search(pinyinWithoutNonZh, { quick: true, longest: false }).length === 0 ? true : false);
             }
             // #endregion
             // #region 各种常量
