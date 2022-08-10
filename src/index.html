@@ -27,10 +27,12 @@
         <!-- 一级标题保留 -->
         <h1>我是你爹.com</h1>
         <!-- forerunner 模板在动态调整 Markdown 图片时用到的样式，其中 lg:max-w-3/5 在配置文件中定制，并且已经试验过了，断点也是要编译的 -->
-        <!-- text-blue-500 hover:text-blue-600 是 Markdown 解析的链接的颜色 -->
+        <!-- text-blue-500 hover:underline 是 Markdown 解析的链接的颜色 -->
+        <!-- hover:text-blue-600 用于按钮 -->
         <!-- disabled:opacity-50 是正在提交数据时用在按钮上的 -->
+        <!-- hover:underline 用于右下角档案状态显示 -->
         <div
-            class="dh-template-forerunner-styles lg:max-w-3/5 mx-auto my-4 object-scale-down text-blue-500 hover:text-blue-600 disabled:opacity-50">
+            class="dh-template-forerunner-styles lg:max-w-3/5 mx-auto my-4 object-scale-down text-blue-500 hover:text-blue-600 disabled:opacity-50 hover:underline">
         </div>
         <div class="dh-template-test-styles invisible"></div>
     </div>
@@ -225,7 +227,7 @@
                             </div>
                         </div>
                         <div
-                            class="dh-profile-info cursor-pointer absolute right-6 bottom-2 text-right text-xs text-gray-500">
+                            class="dh-profile-info cursor-pointer absolute right-6 bottom-2 text-right text-xs text-gray-500 hover:underline">
                         </div>
                     </div>
                 </div>
@@ -312,7 +314,7 @@
         <!-- #endregion -->
     </div>
     <script>
-        const DEV = false;
+        const DEV = true;
         console.log('瞅什么瞅，我是你爹！');
         $('.dh-about-btn').click(() => {
             alert('仅为玩笑，切莫当真。\n如果您觉得权力、名誉等受到侵犯，或发现了不适宜甚至违法的内容，通常可以直接删除。如果档案受保护或在本地生成无法删除，请联系 bianyukun1213@outlook.com。十分抱歉，并感谢您的反馈！');
@@ -829,7 +831,8 @@
                             let markdownCensored = isWordValid(profile.markdown) ? profile.markdown : '❤️';
                             $(`.dh-template-${profile.template} .dh-markdown`).html(DOMPurify.sanitize(marked.parse(markdownCensored)));
                             $(`.dh-template-${profile.template} .dh-markdown img`).addClass('mx-auto my-4 lg:max-w-3/5 object-scale-down');
-                            $(`.dh-template-${profile.template} .dh-markdown a`).addClass('text-blue-500 hover:text-blue-600');
+                            // $(`.dh-template-${profile.template} .dh-markdown a`).addClass('text-blue-500 hover:text-blue-600');
+                            $(`.dh-template-${profile.template} .dh-markdown a`).addClass('text-blue-500 hover:underline');
                             if (profile.cloudMusicId) {
                                 $(`.dh-template-${profile.template} .dh-music`).html(`<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=${profile.cloudMusicId}&auto=1&height=32"></iframe>`);
                                 $(`.dh-template-${profile.template} .dh-music`).removeClass('hidden');
