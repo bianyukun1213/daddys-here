@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -172,7 +172,7 @@
     <div class="dh-root absolute inset-0">
         <!-- #region “先行者”模板 -->
         <div
-            class="dh-about-btn cursor-pointer absolute right-0 bottom-0 w-14 h-14 z-40 flex items-center justify-center text-3xl text-red-500 hover:text-red-600">
+            class="dh-about-btn cursor-pointer absolute right-0 bottom-0 w-14 h-14 z-40 flex items-center justify-center text-3xl text-red-500 hover:text-red-600" title="关于">
             <i class="fa-solid fa-circle-info"></i>
         </div>
         <!-- 以 forerunner 为准 -->
@@ -211,11 +211,11 @@
                     <div class="dh-card-tail flex flex-nowrap justify-between">
                         <div class="dh-functions flex flex-nowrap">
                             <div
-                                class="dh-function-btn-switch-profile cursor-pointer w-12 h-12 mr-4 flex items-center justify-center text-3xl text-blue-500 hover:text-blue-600">
+                                class="dh-function-btn-switch-profile cursor-pointer w-12 h-12 mr-4 flex items-center justify-center text-3xl text-blue-500 hover:text-blue-600" title="切换档案">
                                 <i class="fa-regular fa-address-card"></i>
                             </div>
                             <div
-                                class="dh-function-btn-edit-profile cursor-pointer w-12 h-12 mr-4 flex items-center justify-center text-3xl text-blue-500 hover:text-blue-600">
+                                class="dh-function-btn-edit-profile cursor-pointer w-12 h-12 mr-4 flex items-center justify-center text-3xl text-blue-500 hover:text-blue-600" title="编辑档案">
                                 <i class="fa-solid fa-user-pen"></i>
                             </div>
                         </div>
@@ -314,7 +314,8 @@
         <!-- #endregion -->
     </div>
     <script>
-        const DEV = false;
+        const DEV = true;
+        // const DEV = false;
         console.log('瞅什么瞅，我是你爹！');
         $('.dh-about-btn').click(() => {
             alert('仅为玩笑，切莫当真。\n如果您觉得权力、名誉等受到侵犯，或发现了不适宜甚至违法的内容，通常可以直接删除。如果档案受保护或在本地生成无法删除，请联系 bianyukun1213@outlook.com。十分抱歉，并感谢您的反馈！');
