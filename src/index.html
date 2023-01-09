@@ -676,7 +676,10 @@
                                 success: (res) => {
                                     alert('成功！');
                                     closeOperationScreen();
-                                    window.location.href = `https://${name}.我是你爹.com`;
+                                    // window.location.href = `https://${name}.我是你爹.com`;
+                                    // name 变量的值是编辑框中的内容，在新建和修改操作中，使用这个值是合适的
+                                    // 但在删除操作中，应该使用 currentProfile.name
+                                    window.location.href = `https://${currentProfile.name}.我是你爹.com`;
                                 },
                                 fail: (status, code, msg) => {
                                     alert(`失败：${code ? msg : status}。`)
